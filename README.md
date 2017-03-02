@@ -14,7 +14,7 @@ Test exam project by<br>
 		- input variables		Examples void Method ( iVarname )<br>
 		- Readable summaries 	Example triple / generates summary<br>
 
-Variables 	
+<b>Variables</b> 	
 - Private vars	with a _	Example _varname <br>	
 - Public vars no extra		Example varname <br>
 - Constants uppercase	Example VARNAME / CONST_VARNAME <br>
@@ -41,10 +41,10 @@ Variables
 - Exam.Type.Sub.Sub.Sub.etc <br>
 	Example: Exam.References.Tags <br>
 	Example: Exam.References.Names <br>
-<b>
+<br>
 Do not forget to auto format your code with 	Monodevelop: http://stackoverflow.com/questions/20915666/shortcut-for-formatting-code-in-monodevelop <br>
 Visual Studio: CRTL+ K + D <br>
-<b>
+<br>
 Format to <br>
 Void Method() <br>
 { <br>
