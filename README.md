@@ -14,18 +14,18 @@ Noa van Bentem <br>
 Nick Schaatsbergen <br>
 Bram Nijland  <br>
  <br>
-<b>Code conventions</b>
-
+<b>Code conventions</b><br>
+<br>
 <b>Language:</b> English<br>
 <b>Code Language:</b> C#<br>
 <br>
-<b>Functions <b>/Methods</b>	
+<b>Functions/Methods</b><br>	
 - Start Uppercased/  PascalCasing.			Example: void MyCoolMethod()<br>
 - Group in Region.					Example: #region Calculations #endregion<br>
 - Temp variables 					Example tVarname <br>	
 - input variables					Examples void Method ( iVarname )<br>
 - Readable summaries 					Example triple / generates summary<br>
-<br>
+<br><br>
 <b>Variables</b> <br>	
 - Private vars	with a _					Example _varname <br>	
 - Public vars no extra						Example varname <br>
@@ -36,7 +36,7 @@ Bram Nijland  <br>
 - Public non serializable variables with HideInInspector	Example [HideInInspector] public var; <br>
 - Serializable variables with ToolBox				Example: [Tooltip("Explanation.")] <br>
 - camelCasing 							Example: thisIsAVariable; <br>
- <br>
+ <br><br>
 <b>Namespaces and Regions</b> <br>
 - <b>Region names:</b> // all methods with given region name have to be sorted inside the region-endregion <br>
 - Calculations // Math <br>
@@ -49,7 +49,7 @@ Bram Nijland  <br>
 - Exam.Type.Sub.Sub.Sub.etc <br>
 	Example: Exam.References.Tags <br>
 	Example: Exam.References.Names <br>
-<br>
+<br><br><br>
 Do not forget to auto format your code with 	Monodevelop: http://stackoverflow.com/questions/20915666/shortcut-for-formatting-code-in-monodevelop <br>
 Visual Studio: CRTL+ K + D <br>
 <br>
@@ -58,7 +58,7 @@ Void Method() <br>
 { <br>
 	//code <br>
 } <br>
- <br>
+ <br><br>
 //@Author name to define you have worked in this class. <br>
  <br>
 Use singleton for single use components Example Managers. <br>
