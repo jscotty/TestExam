@@ -1,6 +1,19 @@
 # TestExam
-Test exam project by<br>
+Test exam project <br>
 
+Team <br>
+<b>Programmers:</b>:<br>
+Justin Scott Bieshaar - Lead <br>
+Rocky Tempelaars<br>
+Nick van Dokkum <br>
+<br>
+<b>Artists:</b>
+Noel Karremans - Lead <br>
+Mitch Rijkse <br>
+Noa van Bentem <br>
+Nick Schaatsbergen <br>
+Bram Nijland  <br>
+ <br>
 <b>Code conventions</b>
 
 <b>Language:</b> English<br>
