@@ -36,6 +36,7 @@ Bram Nijland  <br>
 - Public non serializable variables with HideInInspector	Example [HideInInspector] public var; <br>
 - Serializable variables with ToolBox				Example: [Tooltip("Explanation.")] <br>
 - camelCasing 							Example: thisIsAVariable; <br>
+- Shader properties start With _PascalCasing			Example: _Propertie;<br>
  <br><br>
 <b>Namespaces and Regions</b> <br>
 - <b>Region names:</b> // all methods with given region name have to be sorted inside the region-endregion <br>
