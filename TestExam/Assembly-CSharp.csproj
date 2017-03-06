@@ -46,7 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Singleton.cs" />
+     <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\References\Names\ControllerInput.cs" />
+     <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
+     <Compile Include="Assets\Scripts\Xbox\XboxControllerManager.cs" />
+     <None Include="Assets\Shaders\OutlineCol.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
