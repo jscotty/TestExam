@@ -58,8 +58,8 @@ Class naming using PascalCasing<br>
  <br>
 - <b>Namespaces:</b> <br>
 - Exam.Type.Sub.Sub.Sub.etc <br>
-	Example: Exam.References.Tags <br>
-	Example: Exam.References.Names <br>
+		Example: Exam.References.Tags <br>
+		Example: Exam.References.Names <br>
 <br><br><br>
 Do not forget to auto format your code with 	Monodevelop: http://stackoverflow.com/questions/20915666/shortcut-for-formatting-code-in-monodevelop <br>
 Visual Studio: CRTL+ K + D <br>
@@ -86,6 +86,7 @@ Commit push art assets for programmers.<br>
 Everything in english<br>
 Art naming convention: MainMenu_ButtonStart_Unclicked <br>
 <br>
+<b>Communication</b><br>
 Communication through whatsapp and face-to-face conversations<br>
 Communicate if working in same scene's<br>
 <br>
