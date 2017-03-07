@@ -40,8 +40,6 @@ Class naming using PascalCasing<br>
 - Private vars	with a _					Example _varname <br>	
 - Public vars no extra						Example varname <br>
 - Constants uppercase						Example VARNAME / CONST_VARNAME <br>
-- Getter declare private set					Example public var {get;private set;} <br>
-- Setter declare private get					Example public var {private get; set;} <br>
 - Inspector items declared SerializeField			Example [SerializeField] private var; <br>
 - Public non serializable variables with HideInInspector	Example [HideInInspector] public var; <br>
 - Serializable variables with ToolBox				Example: [Tooltip("Explanation.")] <br>
@@ -60,6 +58,12 @@ Class naming using PascalCasing<br>
 - Exam.Type.Sub.Sub.Sub.etc <br>
 		Example: Exam.References.Tags <br>
 		Example: Exam.References.Names <br>
+<br>
+<b>Getters and Setters:</b><br>
+- Start with PascalCasing<br>
+- Define with summary if setter or/and getter.		Example ///<summary> get; private set;</summary><br>
+- Getter declare private set	Example public Var { get; private set; }<br>
+- Setter declare private get	Example public Var { private get; set; }<br>
 <br><br><br>
 Do not forget to auto format your code with 	Monodevelop: http://stackoverflow.com/questions/20915666/shortcut-for-formatting-code-in-monodevelop <br>
 Visual Studio: CRTL+ K + D <br>
