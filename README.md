@@ -17,7 +17,7 @@ Bram Nijland  <br>
 <b>Commit conventions</b><br>
 Every day commit ( end of the day ) <br>
 Commit whenever finished backlog assets <br>
-Push finish backlog <br>
+Push finish backlog ( user story ) <br>
 Never commit errors! <br>
 Merge conflicts, check togetter <br>
 (In case of emergency. commit -> push -> leave building) <br> 
@@ -90,7 +90,7 @@ Art naming convention: MainMenu_ButtonStart_Unclicked <br>
 Communication through whatsapp and face-to-face conversations<br>
 Communicate if working in same scene's<br>
 <br>
-<b>texturers en modelers: </b>
+<b>texturers en modelers: </b><br>
 Models in .FBX<br>
 Textures in .PSD<br>
 <br><br>
