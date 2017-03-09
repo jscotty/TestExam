@@ -11,17 +11,19 @@ public class ItemImageSelect : MonoBehaviour {
     [SerializeField] private Image _material0;
     [SerializeField] private Image _material1;
 
-	public void SetImages(int iRecipe) {
-        _completeItemImage.sprite = _completeItemSprites[iRecipe];
-        if(iRecipe == 0) {
+	public void SetImages(Recipe iRecipe) {
+        if (iRecipe.whatItemWillIBecome == Items.sword) {
+            _completeItemImage.sprite = _completeItemSprites[0];
             _material0.sprite = _materialSprites[0];
             _material1.sprite = _materialSprites[0];
         }
-        else if (iRecipe == 1) {
+        else if (iRecipe.whatItemWillIBecome == Items.shield) {
+            _completeItemImage.sprite = _completeItemSprites[1];
             _material0.sprite = _materialSprites[0];
             _material1.sprite = _materialSprites[1];
         }
-        else if (iRecipe == 2) {
+        else if (iRecipe.whatItemWillIBecome == Items.bow) {
+            _completeItemImage.sprite = _completeItemSprites[2];
             _material0.sprite = _materialSprites[1];
             _material1.sprite = _materialSprites[1];
         }
