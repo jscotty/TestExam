@@ -13,11 +13,21 @@ Mitch Rijkse <br>
 Noa van Bentem <br>
 Nick Schaatsbergen <br>
 Bram Nijland  <br>
- <br>
+<br><br>
+<b>Commit conventions</b><br>
+Every day commit ( end of the day ) <br>
+Commit whenever finished backlog assets <br>
+Push finish backlog ( user story ) <br>
+Never commit errors! <br>
+Merge conflicts, check togetter <br>
+(In case of emergency. commit -> push -> leave building) <br> 
+<br><br>
 <b>Code conventions</b><br>
 <br>
 <b>Language:</b> English<br>
 <b>Code Language:</b> C#<br>
+<br>
+Class naming using PascalCasing<br>
 <br>
 <b>Functions/Methods</b><br>	
 - Start Uppercased/  PascalCasing.			Example: void MyCoolMethod()<br>
@@ -30,8 +40,6 @@ Bram Nijland  <br>
 - Private vars	with a _					Example _varname <br>	
 - Public vars no extra						Example varname <br>
 - Constants uppercase						Example VARNAME / CONST_VARNAME <br>
-- Getter declare private set					Example public var {get;private set;} <br>
-- Setter declare private get					Example public var {private get; set;} <br>
 - Inspector items declared SerializeField			Example [SerializeField] private var; <br>
 - Public non serializable variables with HideInInspector	Example [HideInInspector] public var; <br>
 - Serializable variables with ToolBox				Example: [Tooltip("Explanation.")] <br>
@@ -48,8 +56,14 @@ Bram Nijland  <br>
  <br>
 - <b>Namespaces:</b> <br>
 - Exam.Type.Sub.Sub.Sub.etc <br>
-	Example: Exam.References.Tags <br>
-	Example: Exam.References.Names <br>
+		Example: Exam.References.Tags <br>
+		Example: Exam.References.Names <br>
+<br>
+<b>Getters and Setters:</b><br>
+- Start with PascalCasing<br>
+- Define with summary if setter or/and getter.		Example ///<summary> get; private set;</summary><br>
+- Getter declare private set	Example public Var { get; private set; }<br>
+- Setter declare private get	Example public Var { private get; set; }<br>
 <br><br><br>
 Do not forget to auto format your code with 	Monodevelop: http://stackoverflow.com/questions/20915666/shortcut-for-formatting-code-in-monodevelop <br>
 Visual Studio: CRTL+ K + D <br>
@@ -64,3 +78,25 @@ Void Method() <br>
  <br>
 Use singleton for single use components Example Managers. <br>
 http://wiki.unity3d.com/index.php/Singleton <br>
+<br><br>
+<b>Pipeline:</b><br>
+<b>Artists:</b><br>
+Textures in standard sizes<br>
+2d art in power of 2<br>
+Google drive for artists individually.<br>
+Commit push art assets for programmers.<br>
+<br>
+<b>Naming conventions</b><br>
+Everything in english<br>
+Art naming convention: MainMenu_ButtonStart_Unclicked <br>
+<br>
+<b>Communication</b><br>
+Communication through whatsapp and face-to-face conversations<br>
+Communicate if working in same scene's<br>
+<br>
+<b>texturers en modelers: </b><br>
+Models in .FBX<br>
+Textures in .PSD<br>
+<br><br>
+<b>Programmers</b><br>
+Share code through git.<br>

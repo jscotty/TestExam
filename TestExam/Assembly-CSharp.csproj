@@ -46,11 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
-     <Compile Include="Assets\Scripts\DashHit.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerInformation.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\References\Names\ControllerInput.cs" />
      <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
      <Compile Include="Assets\Scripts\Xbox\XboxControllerManager.cs" />
@@ -72,9 +68,6 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
- </Reference>
- <Reference Include="XInputDotNetPure">
- <HintPath>C:/Users/justin/Desktop/maps/Exam/TestExam/TestExam/Assets/XInputDotNet/x86_64/XInputDotNetPure.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
