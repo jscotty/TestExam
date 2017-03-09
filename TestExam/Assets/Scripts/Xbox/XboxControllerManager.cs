@@ -40,6 +40,33 @@ public class XboxControllerManager : Singleton<XboxControllerManager> {
 		float tHorizontalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.X;
 		float tVerticalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.Y;
 		if(tHorizontalInput!=0 &&tVerticalInput!=0) return true;
+
 		return false;
 	}
+
+	public bool GetButtonPressed(PlayerInformation iPlayerInformation, ButtonType iButton){
+		switch (iButton) {
+		case ButtonType.BUTTON_A:
+			return iPlayerInformation.PlayerState.Buttons.A.Equals(ButtonState.Pressed);
+			break;
+		case ButtonType.BUTTON_B:
+			return iPlayerInformation.PlayerState.Buttons.B.Equals(ButtonState.Pressed);
+			break;
+		case ButtonType.BUTTON_X:
+			return iPlayerInformation.PlayerState.Buttons.X.Equals(ButtonState.Pressed);
+			break;
+		case ButtonType.BUTTON_Y:
+			return iPlayerInformation.PlayerState.Buttons.Y.Equals(ButtonState.Pressed);
+			break;
+		}
+
+		return false;
+	}
+}
+
+public enum ButtonType{
+	BUTTON_A,
+	BUTTON_B,
+	BUTTON_X,
+	BUTTON_Y
 }

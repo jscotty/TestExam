@@ -20,6 +20,12 @@ public class PlayerInformation {
 	}
 
 	/// <summary>
+	/// get; private set;
+	/// </summary>
+	/// <value>The selected character path.</value>
+	public string SelectedCharacterPath{ get; private set; }
+
+	/// <summary>
 	/// Gets a value indicating whether this instance is connected.
 	/// </summary>
 	/// <value><c>true</c> if this instance is connected; otherwise, <c>false</c>.</value>
