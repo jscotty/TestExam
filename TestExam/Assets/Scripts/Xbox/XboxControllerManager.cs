@@ -4,78 +4,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Exam.References.Names.ControllerInput;
+using XInputDotNetPure;
 
 public class XboxControllerManager : Singleton<XboxControllerManager> {
 
-	private const float _SENSIVITY = 0.5f;
+	private const float _SENSITIVITY = 0.5f;
+
+	/// <summary>
+	/// Vibrate the specified controller of PlayerIndex
+	/// </summary>
+	/// <param name="iPlayerIndex">player index.</param>
+	/// <param name="iLeftPower">left vibration power.</param>
+	/// <param name="iRightPower">Right vibration power.</param>
+	public void Vibrate(PlayerIndex iPlayerIndex, float iLeftPower, float iRightPower){
+		GamePad.SetVibration(iPlayerIndex,iLeftPower,iRightPower);
+	}
 
 	/// <summary>
 	/// Gets the left stick axis.
 	/// </summary>
 	/// <returns>The left stick axis.</returns>
-	/// <param name="playerID">Player I.</param>
-	public Vector3 GetLeftStickAxis(int iPlayerID){
-		return new Vector3(
-			Input.GetAxis(ControllerInput.HORIZONTAL+iPlayerID), //X
-			0, //Y
-			Input.GetAxis(ControllerInput.VERTICAL+iPlayerID) //Z
-		);
+	/// <param name="iPlayerInformation">player information.</param>
+	public Vector3 GetLeftStickAxis(PlayerInformation iPlayerInformation){
+		float tHorizontalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.X;
+		float tVerticalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.Y;
+		return new Vector3(tHorizontalInput,0,tVerticalInput);
 	}
 
 	/// <summary>
 	/// Gets the left stick interaction.
 	/// </summary>
-	/// <returns><c>true</c>, if left stick interacted, <c>false</c> otherwise.</returns>
-	/// <param name="iPlayerID">player ID.</param>
-	public bool GetLeftStickInteraction(int iPlayerID){
-		if(Input.GetAxis(ControllerInput.HORIZONTAL+iPlayerID) > _SENSIVITY  || Input.GetAxis(ControllerInput.HORIZONTAL+iPlayerID) < -_SENSIVITY
-			|| Input.GetAxis(ControllerInput.VERTICAL+iPlayerID) > _SENSIVITY || Input.GetAxis(ControllerInput.VERTICAL+iPlayerID) < -_SENSIVITY)
-			return true;
+	/// <returns><c>true</c>, if left stick interaction was gotten, <c>false</c> otherwise.</returns>
+	/// <param name="iPlayerInformation">player information.</param>
+	public bool GetLeftStickInteraction(PlayerInformation iPlayerInformation){
+		float tHorizontalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.X;
+		float tVerticalInput = iPlayerInformation.PlayerState.ThumbSticks.Left.Y;
+		if(tHorizontalInput!=0 &&tVerticalInput!=0) return true;
+
 		return false;
 	}
 
-	/// <summary>
-	/// Gets the given button state.
-	/// </summary>
-	/// <returns><c>true</c>, if button was gotten, <c>false</c> otherwise.</returns>
-	/// <param name="iPlayerID">Player ID.</param>
-	/// <param name="iButton">Button type enum.</param>
-	public bool GetButton(int iPlayerID, ButtonType iButton){
-		bool tButtonPressed;
-
-		//chech if button is pressed
-		float tAxis = Input.GetAxis(GetButtonReference(iButton)+ iPlayerID.ToString());
-		if(tAxis  > 0) return true;
-		return false;
-	}
-
-	/// <summary>
-	/// Gets axis reference for the given button type.
-	/// </summary>
-	/// <returns>Returns button axis reference.</returns>
-	/// <param name="iButton">Button type enum.</param>
-	private string GetButtonReference(ButtonType iButton){
+	public bool GetButtonPressed(PlayerInformation iPlayerInformation, ButtonType iButton){
 		switch (iButton) {
 		case ButtonType.BUTTON_A:
-			return ControllerInput.BUTTON_A;
+			return iPlayerInformation.PlayerState.Buttons.A.Equals(ButtonState.Pressed);
 			break;
 		case ButtonType.BUTTON_B:
-			return ControllerInput.BUTTON_B;
+			return iPlayerInformation.PlayerState.Buttons.B.Equals(ButtonState.Pressed);
 			break;
 		case ButtonType.BUTTON_X:
-			return ControllerInput.BUTTON_X;
+			return iPlayerInformation.PlayerState.Buttons.X.Equals(ButtonState.Pressed);
 			break;
 		case ButtonType.BUTTON_Y:
-			return ControllerInput.BUTTON_Y;
+			return iPlayerInformation.PlayerState.Buttons.Y.Equals(ButtonState.Pressed);
 			break;
 		}
-		return "";
+
+		return false;
 	}
 }
 
-/// <summary>
-/// Button type.
-/// </summary>
 public enum ButtonType{
 	BUTTON_A,
 	BUTTON_B,
