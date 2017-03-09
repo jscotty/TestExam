@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemBase : MonoBehaviour
 {
 
-    protected ItemTier pItemTier;
+    [SerializeField] protected ItemTier pItemTier;
     public Items whatItemAmI;
 
     public virtual GameObject PickMeUp()

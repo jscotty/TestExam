@@ -4,29 +4,41 @@ using UnityEngine;
 
 public class UpgradeItemBase : MonoBehaviour {
 
-	[SerializeField] protected float timeForIngotToBeReady;
-    [SerializeField] protected GameObject handoutReadyIcon;
-    [SerializeField] protected GameObject objecToHandOut;
+	[SerializeField] protected float pTimeForIngotToBeReady;
+    [SerializeField] protected GameObject pHandoutReadyIcon;
+    [SerializeField] protected GameObject pObjecToHandOut;
+    protected bool pIsCoroutineRunning = false;
+
+    public virtual void PutItemIn(ItemBase iItemType)
+    {
+
+    }
 
     public virtual void StartTimeTillhandout()
     {
-        StartCoroutine("TimeTillhandout");
+        if (!pIsCoroutineRunning)
+        {
+            StartCoroutine("TimeTillhandout");
+            pIsCoroutineRunning = true;
+        }
+
     }
 
     protected virtual IEnumerator TimeTillhandout()
     {
-        yield return new WaitForSeconds(timeForIngotToBeReady);
+        yield return new WaitForSeconds(pTimeForIngotToBeReady);
         HandoutReady();
+        pIsCoroutineRunning = false;
     }
 
     protected virtual void HandoutReady()
     {
-        handoutReadyIcon.SetActive(true);
+        pHandoutReadyIcon.SetActive(true);
     }
 
     protected virtual GameObject CollectHandout()
     {
-        handoutReadyIcon.SetActive(false);
-        return Instantiate(objecToHandOut);
+        pHandoutReadyIcon.SetActive(false);
+        return Instantiate(pObjecToHandOut);
     }
 }
