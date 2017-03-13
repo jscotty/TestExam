@@ -13,4 +13,8 @@ public class Character : MonoBehaviour {
 		this.pPlayerInformation = iPlayerInformation;
 		return this;
 	}
+
+	void Start(){
+		
+	}
 }

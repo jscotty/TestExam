@@ -10,13 +10,39 @@ public class PlayerInformation {
 	/// <summary>
 	/// get; private set;
 	/// </summary>
-	public PlayerIndex PlayerID { get; private set; }
+	public PlayerIndex PlayerIndex { get; private set; }
+
+	/// <summary>
+	/// Get player index int
+	/// </summary>
+	/// <value>The player I.</value>
+	public int PlayerID{
+		get{
+			switch (this.PlayerIndex) {
+			case PlayerIndex.One:
+				return 0;
+				break;
+			case PlayerIndex.Two:
+				return 1;
+				break;
+			case PlayerIndex.Three:
+				return 2;
+				break;
+			case PlayerIndex.Four:
+				return 3;
+				break;
+			default:
+				return 0;
+				break;
+			}
+		}
+	}
 
 	/// <summary>
 	/// Gets the state of the player.
 	/// </summary>
 	public GamePadState PlayerState{
-		get{ return GamePad.GetState(PlayerID); }
+		get{ return GamePad.GetState(PlayerIndex); }
 	}
 
 	/// <summary>
@@ -34,7 +60,7 @@ public class PlayerInformation {
 	}
 
 	public PlayerInformation Init(PlayerIndex iPlayerIndex){
-		PlayerID = iPlayerIndex;
+		this.PlayerIndex = iPlayerIndex;
 		return this;
 	}
 }

@@ -46,10 +46,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
-     <Compile Include="Assets\Scripts\References\Names\ControllerInput.cs" />
+     <Compile Include="Assets\Scripts\DashHit.cs" />
+     <Compile Include="Assets\Scripts\DestroyWhenFinished.cs" />
+     <Compile Include="Assets\Scripts\Hardware\Controller\IController.cs" />
+     <Compile Include="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" />
+     <Compile Include="Assets\Scripts\Items\Anvil.cs" />
+     <Compile Include="Assets\Scripts\Items\Forge.cs" />
+     <Compile Include="Assets\Scripts\Items\Ingot.cs" />
+     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
+     <Compile Include="Assets\Scripts\Items\Recipe.cs" />
+     <Compile Include="Assets\Scripts\Items\RecipeHolder.cs" />
+     <Compile Include="Assets\Scripts\Items\UpgradeItemBase.cs" />
+     <Compile Include="Assets\Scripts\Items\WoodWorking.cs" />
+     <Compile Include="Assets\Scripts\Particle\ParticleInformation.cs" />
+     <Compile Include="Assets\Scripts\Particle\ParticleManager.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerInformation.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\References\Path\ParticlePaths.cs" />
      <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
-     <Compile Include="Assets\Scripts\Xbox\XboxControllerManager.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -68,6 +84,9 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="XInputDotNetPure">
+ <HintPath>C:/Users/justin/Desktop/maps/Exam/TestExam/TestExam/Assets/XInputDotNet/x86_64/XInputDotNetPure.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
