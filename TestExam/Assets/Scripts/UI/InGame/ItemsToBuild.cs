@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class ItemsToBuild : MonoBehaviour {
 
-    [SerializeField] private GameObject _itemUIPrefab;
+    [SerializeField]
+    private GameObject _itemUIPrefab;
     private List<GameObject> _currentRecipes = new List<GameObject>();
-    [SerializeField] private RecipeHolder _recipeHolder;
+    [SerializeField]
+    private RecipeHolder _recipeHolder;
     private List<Items> _currentItems = new List<Items>();
-    [SerializeField] private Scores _scores;
+    [SerializeField]
+    private Scores _scores;
 
     private void Start() {
         CreateRecipe();
@@ -29,7 +32,7 @@ public class ItemsToBuild : MonoBehaviour {
 
 #if UNITY_EDITOR
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)){
+        if (Input.GetKeyDown(KeyCode.P)) {
             Debug.Log(canHandInItem(Items.bow));
         }
         if (Input.GetKeyDown(KeyCode.O)) {
@@ -43,7 +46,7 @@ public class ItemsToBuild : MonoBehaviour {
     /// <summary>
     /// Creates a recipe and instantiates a prefab to show which item has to be made
     /// </summary>
-    public void CreateRecipe () {
+    public void CreateRecipe() {
         if (_scores.CurrentScore < _scores.MaxScore - _currentRecipes.Count) {
             Recipe tRecipe = _recipeHolder.GetRandomRecipe();
             GameObject tItemUI = Instantiate(_itemUIPrefab, this.transform, false);
@@ -62,7 +65,7 @@ public class ItemsToBuild : MonoBehaviour {
     public bool canHandInItem(Items iItem) {
         for (int item = 0; item < _currentItems.Count; item++) {
             Debug.Log(_currentItems[item]);
-            if(_currentItems[item] == iItem) {
+            if (_currentItems[item] == iItem) {
                 GameObject tRecipe = _currentRecipes[item];
                 _currentRecipes.RemoveAt(item);
                 Destroy(tRecipe);

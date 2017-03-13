@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Scores : MonoBehaviour {
 
-    [SerializeField] private int _maxScore;
-    [SerializeField] private Text _scoreText;
+    [SerializeField]
+    private int _maxScore;
+    [SerializeField]
+    private Text _scoreText;
 
     public int CurrentScore { get; private set; }
     public int MaxScore { get; private set; }

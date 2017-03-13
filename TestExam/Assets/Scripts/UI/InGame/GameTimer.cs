@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour {
 
-    [SerializeField] private Text _timeText;
+    [SerializeField]
+    private Text _timeText;
     private int _minutes;
     private int _seconds;
-    [SerializeField] private int _startMinutes;
-    [SerializeField] private int _startSeconds;
+    [SerializeField]
+    private int _startMinutes;
+    [SerializeField]
+    private int _startSeconds;
 
-    [SerializeField] private ItemsToBuild _itemsToBuild;
+    [SerializeField]
+    private ItemsToBuild _itemsToBuild;
 
     private void Start() {
         SetTimer(_startMinutes, _startSeconds);
@@ -24,7 +28,7 @@ public class GameTimer : MonoBehaviour {
     /// <param name="iSeconds"></param>
     private void SetTimer(int iMinutes, int iSeconds) {
         _minutes = iMinutes;
-        _seconds = iSeconds +1;
+        _seconds = iSeconds + 1;
         StartCoroutine("TimerDelay");
     }
 
@@ -43,7 +47,7 @@ public class GameTimer : MonoBehaviour {
     /// Calculates the current time, updates the text in the UI and checks if time is 0
     /// </summary>
     private void TimeCalculation() {
-        if(_seconds != 0) {
+        if (_seconds != 0) {
             _seconds--;
         }
         else {
