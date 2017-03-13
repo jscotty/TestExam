@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Ambiance.cs" />
      <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\DashHit.cs" />
@@ -66,6 +67,13 @@
      <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\References\Path\ParticlePaths.cs" />
      <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
+     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
+     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
+     <Compile Include="Assets\Scripts\UI\InGame\ItemImageSelect.cs" />
+     <Compile Include="Assets\Scripts\UI\InGame\ItemsToBuild.cs" />
+     <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
+     <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
