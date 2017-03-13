@@ -54,7 +54,7 @@ public class PlayerManager : Singleton<PlayerManager> {
 	/// <param name="iPlayerIndex">player index.</param>
 	private bool IsPlayerIndexListed(PlayerIndex iPlayerIndex){
 		for (int i = 0; i < _players.Count; i++) {
-			if(iPlayerIndex.Equals(_players[i].PlayerID))return true;
+			if(iPlayerIndex.Equals(_players[i].PlayerIndex))return true;
 		}
 		return false;
 	}
