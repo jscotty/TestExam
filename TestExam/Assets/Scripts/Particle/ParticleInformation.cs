@@ -13,6 +13,8 @@ public class ParticleInformation {
 
 	public int Tick { get; private set; }
 
+    public bool IsDestroyable;
+
 	private Transform _parent;
 
 	/// <summary>
@@ -83,6 +85,11 @@ public class ParticleInformation {
 	/// Reset this instance.
 	/// </summary>
 	public void Reset(){
+        this.Particle.transform.position = new Vector3(999,999,999);
 		Tick = 0;
 	}
+
+    public void Remove() {
+        GameObject.Destroy(this.Particle);
+    }
 }

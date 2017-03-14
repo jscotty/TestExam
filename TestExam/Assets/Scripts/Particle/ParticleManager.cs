@@ -10,19 +10,18 @@ public class ParticleManager : Singleton<ParticleManager> {
 
 	private Dictionary<ParticleType, ParticleInformation> _particleReference = new Dictionary<ParticleType, ParticleInformation>();
 	private int[] _ticks;
+    private List<ParticleInformation> _particles = new List<ParticleInformation>();
 
 	/// <summary>
 	/// Initialization
 	/// </summary>
 	private void Start(){
 		string[] tParticlePaths = ParticlePaths.PARTICLES;
-		Debug.Log("initialize");
 		for (int i = 0; i < tParticlePaths.Length; i++) {
 			GameObject tParticle = (GameObject)Resources.Load(tParticlePaths[i]);
 
 			if(tParticle==null) Debug.LogError("Could not find Particle prefab of: " + tParticlePaths[i]);
 			else{
-				Debug.Log("found!" + (ParticleType.DASH+i));
 				_particleReference.Add(ParticleType.DASH+i, new ParticleInformation(tParticle));
 			}
 		}
@@ -34,12 +33,20 @@ public class ParticleManager : Singleton<ParticleManager> {
 			ParticleInformation tParticleInformation = _particleReference[ParticleType.DASH+i];
 			if(_ticks[i] > tParticleInformation.Tick){
 				Reset(ParticleType.DASH+i);
-				Debug.Log("reset:" + (ParticleType.DASH+i));
 				_ticks[i] = 0;
 			}
 			if(tParticleInformation.Tick!=0)
 				_ticks[i]++;
 		}
+        for (int i = 0; i < _particles.Count; i++) {
+            if (_particles[i].IsDestroyable) {
+                if (!_particles[i].ParticleSystem.IsAlive())
+                {
+                    _particles[i].Remove();
+                    _particles.Remove(_particles[i]);
+                }
+            }
+        }
 	}
 
 	/// <summary>
@@ -56,46 +63,86 @@ public class ParticleManager : Singleton<ParticleManager> {
 	/// </summary>
 	/// <param name="iParticleType">In particle type.</param>
 	/// <param name="iPosition">In particle position.</param>
-	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition){
-		_particleReference[iParticleType].SetParticlePosition(iPosition);
-	}
+	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition, bool iIsDestroyable = false){
+        if (iIsDestroyable)
+        {
+            ParticleInformation tParticleInformation = GenerateDestroyableParticle(iParticleType);
+            tParticleInformation.SetParticlePosition(iPosition);
+        }
+        else
+        {
+            _particleReference[iParticleType].SetParticlePosition(iPosition);
+        }
+    }
 
 	/// <summary>
 	/// Spawn particles
 	/// </summary>
 	/// <param name="iParticleType">In particle type.</param>
 	/// <param name="iPosition">In particle position.</param>
-	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition, Quaternion iRotation){
-		_particleReference[iParticleType].SetParticlePosition(iPosition);
-	}
+	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition, Quaternion iRotation, bool iIsDestroyable = false)
+    {
+        if (iIsDestroyable)
+        {
+            ParticleInformation tParticleInformation = GenerateDestroyableParticle(iParticleType);
+            tParticleInformation.SetParticlePosition(iPosition);
+        }
+        else
+        {
+            _particleReference[iParticleType].SetParticlePosition(iPosition);
+        }
+    }
 
 	/// <summary>
 	/// Spawn particles
 	/// </summary>
 	/// <param name="iParticleType">In particle type.</param>
 	/// <param name="iPosition">In particle position.</param>
-	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition, Vector3 iLocalRotation){
-		_particleReference[iParticleType].SetParticlePosition(iPosition);
-	}
+	public void SpawnParticle(ParticleType iParticleType, Vector3 iPosition, Vector3 iLocalRotation, bool iIsDestroyable = false)
+    {
+        if (iIsDestroyable)
+        {
+            ParticleInformation tParticleInformation = GenerateDestroyableParticle(iParticleType);
+            tParticleInformation.SetParticlePosition(iPosition);
+        }
+        else
+        {
+            _particleReference[iParticleType].SetParticlePosition(iPosition);
+        }
+    }
 
 	/// <summary>
 	/// Spawns the particle assigned to object.
 	/// </summary>
 	/// <param name="iParticleType">I particle type.</param>
 	/// <param name="iTransform">I transform.</param>
-	public void SpawnParticleAssignedToObject(ParticleType iParticleType, Transform iTransform){
-		_particleReference[iParticleType].SetParticleParent(iTransform, iTransform.localRotation.eulerAngles);
-	}
-	#endregion
-}
+	public void SpawnParticleAssignedToObject(ParticleType iParticleType, Transform iTransform, bool iIsDestroyable = false)
+    {
 
-/// <summary>
-/// Particle type stored for reference and readability.
-/// </summary>
-public enum ParticleType{
-	DASH = 0,
-	DASH1 = 1,
-	DASH2 = 2,
-	DASH3 = 3,
-	DASH_HIT_WALL = 4,
+        if (iIsDestroyable)
+        {
+            ParticleInformation tParticleInformation = GenerateDestroyableParticle(iParticleType);
+            tParticleInformation.SetParticleParent(iTransform, iTransform.localRotation.eulerAngles);
+        }
+        else
+        {
+            _particleReference[iParticleType].SetParticleParent(iTransform, iTransform.localRotation.eulerAngles);
+        }
+
+    }
+    #endregion
+
+    private ParticleInformation GenerateDestroyableParticle(ParticleType iParticleType) {
+        GameObject tParticle = (GameObject)Resources.Load(ParticlePaths.PARTICLES[(int)iParticleType]);
+
+        if (tParticle == null) Debug.LogError("Could not find Particle prefab of: " + iParticleType);
+        else
+        {
+            ParticleInformation tParticleInformation = new ParticleInformation(tParticle);
+            tParticleInformation.IsDestroyable = true;
+            _particles.Add(tParticleInformation);
+            return tParticleInformation;
+        }
+        return null;
+    }
 }

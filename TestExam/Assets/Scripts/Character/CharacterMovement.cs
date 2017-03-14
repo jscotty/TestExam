@@ -8,8 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterMovement : Character {
 
-	[SerializeField] private float _speed = 2.0f;
-	[SerializeField] private float _dashSpeedMultiplier = 2.0f;
+	[SerializeField] private float _speed = 200.0f;
+	[SerializeField] private float _dashSpeed = 250.0f;
 	[SerializeField] private float _dashCooldownInSeconds = 2.0f;
 	[SerializeField] private float _dashLengthSeconds = 1.0f;
 	[SerializeField] private ButtonType _dashButton;
@@ -55,8 +55,10 @@ public class CharacterMovement : Character {
 			_dashCount = 0.0f;
 			_isDashing = false;
 			_isDashCooldown = true;
-		}
-		iDirection += transform.forward*_dashSpeedMultiplier;
+        }
+
+        float tSpeed = Time.deltaTime * _dashSpeed;
+        iDirection = transform.forward* tSpeed;
 		return iDirection;
 	}
 
@@ -74,14 +76,17 @@ public class CharacterMovement : Character {
 	void OnCollisionEnter(Collision iCollision){
 		Debug.Log(iCollision.impulse.magnitude);
 
-		Vector3 tHitPosition = transform.position+(transform.forward*1.5f);
-		Vector3 tRotation = transform.localEulerAngles;
+		Vector3 tHitPosition = transform.position+(transform.forward);
 
-		if(iCollision.impulse.magnitude > 2)
-			iCollision.gameObject.SendMessage("OnDashHit", tHitPosition, SendMessageOptions.DontRequireReceiver);
+        if (iCollision.impulse.magnitude > 4000)
+			iCollision.gameObject.SendMessage("OnHit", tHitPosition, SendMessageOptions.DontRequireReceiver);
 		if(!_isDashing)
 			return;
 		_isDashing = false;
 		iCollision.gameObject.SendMessage("OnDashHit", tHitPosition, SendMessageOptions.DontRequireReceiver);
 	}
+
+    void OnCollisionStay(Collision iCollision) {
+        Debug.Log("collision stayed!" + iCollision.gameObject.name);
+    }
 }

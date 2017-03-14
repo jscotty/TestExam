@@ -1,19 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DashHit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerSpawner.cs">
     <Files>
-      <File FileName="Assets\Shaders\OutlineCol.shader" Line="45" Column="26" />
-      <File FileName="Assets\Scripts\Character\CharacterMovement.cs" Line="51" Column="95" />
-      <File FileName="Assets\Scripts\Character\Character.cs" Line="12" Column="18" />
-      <File FileName="Assets\Scripts\Player\PlayerInformation.cs" Line="34" Column="4" />
-      <File FileName="Assets\Scripts\Player\PlayerManager.cs" Line="30" Column="67" />
-      <File FileName="Assets\Scripts\DashHit.cs" Line="13" Column="42" />
-      <File FileName="Assets\Scripts\DestroyWhenFinished.cs" Line="10" Column="2" />
-      <File FileName="Assets\Scripts\References\Path\ParticlePaths.cs" Line="17" Column="30" />
-      <File FileName="Assets\Scripts\Particle\ParticleManager.cs" Line="100" Column="20" />
-      <File FileName="Assets\Scripts\Particle\ParticleInformation.cs" Line="59" Column="30" />
-      <File FileName="Assets\Scripts\Hardware\Controller\IController.cs" Line="20" Column="14" />
-      <File FileName="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" Line="33" Column="1" />
+      <File FileName="Assets\Shaders\OutlineCol.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Character\CharacterMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Character\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\PlayerInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\PlayerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DashHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DestroyWhenFinished.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\References\Path\ParticlePaths.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Particle\ParticleManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Particle\ParticleInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Hardware\Controller\IController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\PlayerSpawner.cs" Line="15" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

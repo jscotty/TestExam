@@ -12,9 +12,17 @@ namespace Exam.Reference.Path{
 			"Particles/Dash",
 			"Particles/Dash",
 			"Particles/Dash_Hit_Wall",
-			"Particles/Dash_Hit_Wall",
-			"Particles/Dash_Hit_Wall",
-			"Particles/Dash_Hit_Wall",
 		};
 	}
+}
+/// <summary>
+/// Particle type stored for reference and readability.
+/// </summary>
+public enum ParticleType
+{
+    DASH = 0,
+    DASH1 = 1,
+    DASH2 = 2,
+    DASH3 = 3,
+    DASH_HIT_WALL = 4,
 }
