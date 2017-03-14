@@ -24,6 +24,10 @@ public class SceneLoader : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Checks when the next scene is done loading
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadNewScene() {
         yield return new WaitForSeconds(1);
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
@@ -36,9 +40,12 @@ public class SceneLoader : MonoBehaviour {
         _loadingScreenText.text = _loadingScreenDoneText;
     }
 
+    /// <summary>
+    /// Removes the loading screen if the scene is done loading
+    /// </summary>
     public void RemoveLoadingScreen() {
         if (_destroyable) {
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }
