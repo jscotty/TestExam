@@ -11,6 +11,7 @@ public class DashHit : MonoBehaviour {
 	void OnDashHit(Vector3 iHitPosition){
 		GameObject tHit = hitParticle;
 		tHit.transform.position = iHitPosition;
-		Instantiate(hitParticle);
+		ParticleManager tParticles = ParticleManager.Instance;
+		tParticles.SpawnParticle(ParticleType.DASH_HIT_WALL,iHitPosition);
 	}
 }
