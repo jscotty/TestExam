@@ -1,93 +1,111 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-Shader "Outline/Unlit Colored"
-{
-	Properties {
-	// shader properties
-		_Color ("Color", Color) = (1,1,1,1) // main color
-		_Outline ("outline strength", Range(0.0,5)) = 0.01 // outline strength
-		_OutlineColor ("Outline color", Color) = (0,0,0,0) // outline color
-		[MaterialToggle] _IsCube("IsCube", float) = 0 // for normal calculations
+﻿Shader "Outlined/Diffuse" {
+	Properties{
+		_Color("Main Color", Color) = (.5,.5,.5,1)
+		_OutlineColor("Outline Color", Color) = (0,0,0,1)
+		_Outline("Outline width", Range(.002, 0.03)) = .005
+		_MainTex("Base (RGB)", 2D) = "white" { }
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
 
-		Pass {
-		// outline pass
-			Cull Front // cull front, only need black backface.
+		CGINCLUDE
+#include "UnityCG.cginc"
 
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			
-			#include "UnityCG.cginc"
+		struct appdata {
+		float4 vertex : POSITION;
+		float3 normal : NORMAL;
+	};
 
-			struct appdata { // model data struct.
-				float4 vertex : POSITION;
-				float4 normal : NORMAL;
-			};
+	struct v2f {
+		float4 pos : POSITION;
+		float4 color : COLOR;
+	};
 
-			struct v2f { // model render data struct.
-				float4 vertex : POSITION;
-				float4 color : COLOR;
-			};
+	uniform float _Outline;
+	uniform float4 _OutlineColor;
 
-       		//standard properties
-	        fixed _Outline;
-	        fixed4 _OutlineColor;
-	        float _IsCube;
-			
-			v2f vert (appdata v) { 
-			//vertex calculations
-	        	float3 norm = normalize( v.normal);
-	        	if(_IsCube > 0.5)
-	        		v.vertex.xyz *= (1 + _Outline); // multiply vertex positions with outline strength
-	        	else
-	        		v.vertex.xyz += (norm + _Outline); // multiply vertex positions with outline strength
+	v2f vert(appdata v) {
+		// just make a copy of incoming vertex data but scaled according to normal direction
+		v2f o;
+		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // multiply view and projection matrix
-	        	o.color = _OutlineColor;
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : COLOR {
-				return i.color; // return given outline color.
-			}
-			ENDCG
-		}
+		float3 norm = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
+		float2 offset = TransformViewToProjection(norm.xy);
 
-		Pass {
-		// model color pass
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma multi_compile_fwdbase
-			
-			#include "UnityCG.cginc"
-
-			struct appdata { // model data struct
-				float4 vertex : POSITION;
-			};
-
-			struct v2f {
-				float4 vertex : SV_POSITION;
-			};
-
-       		//standard properties
-			fixed4 _Color;
-			
-			v2f vert (appdata v) {
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // multiply view and projection matrix 
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : COLOR {
-				return _Color;
-			}
-			ENDCG
-		}
+		o.pos.xy += offset * o.pos.z * _Outline;
+		o.color = _OutlineColor;
+		return o;
 	}
+	ENDCG
+
+		SubShader{
+		//Tags {"Queue" = "Geometry+100" }
+		CGPROGRAM
+#pragma surface surf Lambert
+
+		sampler2D _MainTex;
+	fixed4 _Color;
+
+	struct Input {
+		float2 uv_MainTex;
+	};
+
+	void surf(Input IN, inout SurfaceOutput o) {
+		fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+		o.Albedo = c.rgb;
+		o.Alpha = c.a;
+	}
+	ENDCG
+
+		// note that a vertex shader is specified here but its using the one above
+		Pass{
+		Name "OUTLINE"
+		Tags{ "LightMode" = "Always" }
+		Cull Front
+		ZWrite On
+		ColorMask RGB
+		Blend SrcAlpha OneMinusSrcAlpha
+		//Offset 50,50
+
+		CGPROGRAM
+#pragma vertex vert
+#pragma fragment frag
+		half4 frag(v2f i) :COLOR{ return i.color; }
+		ENDCG
+	}
+	}
+
+		SubShader{
+		CGPROGRAM
+#pragma surface surf Lambert
+
+		sampler2D _MainTex;
+	fixed4 _Color;
+
+	struct Input {
+		float2 uv_MainTex;
+	};
+
+	void surf(Input IN, inout SurfaceOutput o) {
+		fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+		o.Albedo = c.rgb;
+		o.Alpha = c.a;
+	}
+	ENDCG
+
+		Pass{
+		Name "OUTLINE"
+		Tags{ "LightMode" = "Always" }
+		Cull Front
+		ZWrite On
+		ColorMask RGB
+		Blend SrcAlpha OneMinusSrcAlpha
+
+		CGPROGRAM
+#pragma vertex vert
+#pragma exclude_renderers gles xbox360 ps3
+		ENDCG
+		SetTexture[_MainTex]{ combine primary }
+	}
+	}
+
+		Fallback "Diffuse"
 }

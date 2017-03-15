@@ -49,9 +49,9 @@
      <Compile Include="Assets\Scripts\Ambiance.cs" />
      <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
-     <Compile Include="Assets\Scripts\DashHitCharacter.cs" />
+     <Compile Include="Assets\Scripts\Character\DashHitCharacter.cs" />
      <Compile Include="Assets\Scripts\DashHitObject.cs" />
-     <Compile Include="Assets\Scripts\DestroyWhenFinished.cs" />
+     <Compile Include="Assets\Scripts\EdgeDetectionController.cs" />
      <Compile Include="Assets\Scripts\Hardware\Controller\IController.cs" />
      <Compile Include="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" />
      <Compile Include="Assets\Scripts\Items\Anvil.cs" />
@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\References\Path\CharacterPaths.cs" />
      <Compile Include="Assets\Scripts\References\Path\ParticlePaths.cs" />
      <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
+     <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
@@ -78,6 +79,7 @@
      <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
+     <None Include="Assets\Shaders\EdgeDetection.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -87,6 +87,6 @@ public class CharacterMovement : Character {
 	}
 
     void OnCollisionStay(Collision iCollision) {
-        Debug.Log("collision stayed!" + iCollision.gameObject.name);
+
     }
 }
