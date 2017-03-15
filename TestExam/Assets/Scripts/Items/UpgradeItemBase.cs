@@ -2,31 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeItemBase : MonoBehaviour {
+public class UpgradeItemBase : MonoBehaviour, IInteract
+{
 
-	[SerializeField] protected float timeForIngotToBeReady;
-    [SerializeField] protected GameObject handoutReadyIcon;
-    [SerializeField] protected GameObject objecToHandOut;
+    [SerializeField]
+    protected float pTimeForItemToBeReady;
+    
+    
+    [SerializeField]
+    protected GameObject pObjecToHandOut;
+    protected bool pIsCoroutineRunning = false;
+
+    public virtual void PutItemIn(ItemBase iItemType, CharacterItemController iPlayerInfo)
+    {
+
+    }
 
     public virtual void StartTimeTillhandout()
     {
-        StartCoroutine("TimeTillhandout");
+        if (!pIsCoroutineRunning)
+        {
+            StartCoroutine(TimeTillhandout());
+            pIsCoroutineRunning = true;
+        }
+
     }
 
     protected virtual IEnumerator TimeTillhandout()
     {
-        yield return new WaitForSeconds(timeForIngotToBeReady);
+        yield return new WaitForSeconds(pTimeForItemToBeReady);
         HandoutReady();
+        pIsCoroutineRunning = false;
     }
 
     protected virtual void HandoutReady()
     {
-        handoutReadyIcon.SetActive(true);
+        
     }
 
-    protected virtual GameObject CollectHandout()
+    public virtual GameObject CollectHandout()
     {
-        handoutReadyIcon.SetActive(false);
-        return Instantiate(objecToHandOut);
+        
+        return Instantiate(pObjecToHandOut);
+    }
+
+    public virtual void Interact(CharacterItemController iItemController)
+    {
+
     }
 }
