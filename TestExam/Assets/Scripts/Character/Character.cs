@@ -8,9 +8,14 @@ using UnityEngine;
 public class Character : MonoBehaviour {
 
 	protected PlayerInformation pPlayerInformation;
+    protected bool pIsStunned = false;
 
 	public Character Init(PlayerInformation iPlayerInformation){
 		this.pPlayerInformation = iPlayerInformation;
 		return this;
+	}
+
+	void Start(){
+		
 	}
 }

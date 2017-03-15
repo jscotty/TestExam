@@ -4,19 +4,48 @@
 using UnityEngine;
 using System.Collections.Generic;
 using XInputDotNetPure;
+using Exam.Reference.Path;
 
 public class PlayerInformation {
-	
-	/// <summary>
-	/// get; private set;
-	/// </summary>
-	public PlayerIndex PlayerID { get; private set; }
+
+    /// <summary>
+    /// Stored character path references, which can be collected by a character type enumaration
+    /// </summary>
+    private Dictionary<CharacterType, string> _characterReference = new Dictionary<CharacterType, string>() {
+        { CharacterType.CUBE, CharacterPaths.CHARACTER }
+    };
+
+    /// <summary>
+    /// get; private set;
+    /// </summary>
+    public PlayerIndex PlayerIndex { get; private set; }
+
+    /// <summary>
+    /// Get player index int
+    /// </summary>
+    /// <value>The player I.</value>
+    public int PlayerID{
+		get{
+			switch (this.PlayerIndex) { // no need to break because of returns
+			case PlayerIndex.One:
+				return 0;
+			case PlayerIndex.Two:
+				return 1;
+			case PlayerIndex.Three:
+				return 2;
+			case PlayerIndex.Four:
+				return 3;
+			default:
+				return 0;
+			}
+		}
+	}
 
 	/// <summary>
 	/// Gets the state of the player.
 	/// </summary>
 	public GamePadState PlayerState{
-		get{ return GamePad.GetState(PlayerID); }
+		get{ return GamePad.GetState(PlayerIndex); }
 	}
 
 	/// <summary>
@@ -33,8 +62,9 @@ public class PlayerInformation {
 		get{ return PlayerState.IsConnected; }
 	}
 
-	public PlayerInformation Init(PlayerIndex iPlayerIndex){
-		PlayerID = iPlayerIndex;
+	public PlayerInformation Init(PlayerIndex iPlayerIndex, CharacterType iCharacterType = CharacterType.CUBE){
+		this.PlayerIndex = iPlayerIndex;
+        this.SelectedCharacterPath = _characterReference[iCharacterType];
 		return this;
 	}
 }
