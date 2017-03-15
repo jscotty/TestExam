@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeItemBase : MonoBehaviour {
+public class UpgradeItemBase : MonoBehaviour, IInteract
+{
 
-	[SerializeField] protected float pTimeForIngotToBeReady;
-    [SerializeField] protected GameObject pHandoutReadyIcon;
-    [SerializeField] protected GameObject pObjecToHandOut;
+    [SerializeField]
+    protected float pTimeForItemToBeReady;
+    
+    
+    [SerializeField]
+    protected GameObject pObjecToHandOut;
     protected bool pIsCoroutineRunning = false;
 
-    public virtual void PutItemIn(ItemBase iItemType)
+    public virtual void PutItemIn(ItemBase iItemType, CharacterItemController iPlayerInfo)
     {
 
     }
@@ -18,7 +22,7 @@ public class UpgradeItemBase : MonoBehaviour {
     {
         if (!pIsCoroutineRunning)
         {
-            StartCoroutine("TimeTillhandout");
+            StartCoroutine(TimeTillhandout());
             pIsCoroutineRunning = true;
         }
 
@@ -26,19 +30,24 @@ public class UpgradeItemBase : MonoBehaviour {
 
     protected virtual IEnumerator TimeTillhandout()
     {
-        yield return new WaitForSeconds(pTimeForIngotToBeReady);
+        yield return new WaitForSeconds(pTimeForItemToBeReady);
         HandoutReady();
         pIsCoroutineRunning = false;
     }
 
     protected virtual void HandoutReady()
     {
-        pHandoutReadyIcon.SetActive(true);
+        
     }
 
-    protected virtual GameObject CollectHandout()
+    public virtual GameObject CollectHandout()
     {
-        pHandoutReadyIcon.SetActive(false);
+        
         return Instantiate(pObjecToHandOut);
+    }
+
+    public virtual void Interact(CharacterItemController iItemController)
+    {
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingot : ItemBase {
-    
+public class Ingot : ItemBase
+{
+
 }

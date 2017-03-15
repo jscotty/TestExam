@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBase : MonoBehaviour
+public class ItemBase : MonoBehaviour, IInteract
 {
 
-    [SerializeField] protected ItemTier pItemTier;
     public Items whatItemAmI;
+    public ItemTiers WhatItemTierAmI;
 
     public virtual GameObject PickMeUp()
     {
         return this.gameObject;
     }
 
+    public void Interact(CharacterItemController iItemController)
+    {
+        iItemController.PickItemUp(this);
+    }
+
 }
 
 public enum Items
 {
-    ore, ingot,
-    log, plank,
-    sword, shield, bow
+    ORE, INGOT, //resource start
+    LOG, PLANK, //resource after convert
+    SWORD, SHIELD, BOW //finished item
 }
 
-
-public enum ItemTier
+public enum ItemTiers
 {
-    Tier1, //resource start
-    Tier2, //resource after conver
-    Tier3  //finished item
+    TIER1,
+    TIER2,
+    TIER3
 }
