@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Ambiance.cs" />
      <Compile Include="Assets\Scripts\Character\Character.cs" />
+     <Compile Include="Assets\Scripts\Character\CharacterAnimationController.cs" />
+     <Compile Include="Assets\Scripts\Character\CharacterItemController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Character\DashHitCharacter.cs" />
      <Compile Include="Assets\Scripts\DashHitObject.cs" />
@@ -57,9 +59,11 @@
      <Compile Include="Assets\Scripts\Items\Anvil.cs" />
      <Compile Include="Assets\Scripts\Items\Forge.cs" />
      <Compile Include="Assets\Scripts\Items\Ingot.cs" />
+     <Compile Include="Assets\Scripts\Items\InteractInterface.cs" />
      <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
      <Compile Include="Assets\Scripts\Items\Recipe.cs" />
      <Compile Include="Assets\Scripts\Items\RecipeHolder.cs" />
+     <Compile Include="Assets\Scripts\Items\RockyTestItemConversion.cs" />
      <Compile Include="Assets\Scripts\Items\UpgradeItemBase.cs" />
      <Compile Include="Assets\Scripts\Items\WoodWorking.cs" />
      <Compile Include="Assets\Scripts\Particle\ParticleInformation.cs" />

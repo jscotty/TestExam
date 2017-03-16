@@ -15,7 +15,7 @@ public class Character : MonoBehaviour {
 		return this;
 	}
 
-	void Start(){
-		
-	}
+    public void Stun(bool iIsStunned) {
+        this.pIsStunned = iIsStunned;
+    }
 }

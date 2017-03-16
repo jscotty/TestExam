@@ -31,7 +31,7 @@ public class PlayerSpawner : MonoBehaviour
         for(int i = 0; i < _playerManager.Players.Count; i++)
         {
             PlayerInformation tPlayer = _playerManager.Players[i];
-            GameObject tCharacter = (GameObject)Resources.Load(tPlayer.SelectedCharacterPath+tPlayer.PlayerID);
+            GameObject tCharacter = (GameObject)Resources.Load(tPlayer.SelectedCharacterPath);
             // stop if nothing found
             if (tCharacter == null) {
                 Debug.LogError("Could not find given character path!");

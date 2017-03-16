@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct Recipe
+public class Recipe
 {
     public Items itemOne;
     public Items itemTwo;

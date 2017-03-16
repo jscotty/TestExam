@@ -71,10 +71,13 @@ public class ParticleInformation {
 			
 		this.Particle.transform.SetParent(iParent);
 		this.Particle.transform.position = iParent.position;
+        this.Particle.transform.localEulerAngles = iParent.localEulerAngles;
 
 		this.ParticleSystem.Play();
 		Tick++;
 	}
+
+
 
 	public void SetColor(Color iColor){
 		this.ParticleSystem.startColor = iColor;

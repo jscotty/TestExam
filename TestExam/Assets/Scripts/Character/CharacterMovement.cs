@@ -14,17 +14,21 @@ public class CharacterMovement : Character {
 	[SerializeField] private float _dashLengthSeconds = 1.0f;
 	[SerializeField] private ButtonType _dashButton;
 
-	private float _dashCooldown = 0.0f;
+    public bool IsDashing { get; private set; }
+    public Vector3 Velocity { get; private set; }
+
+    private float _dashCooldown = 0.0f;
 	private float _dashCount = 0.0f;
 	private bool _isDashCooldown = false;
-	private bool _isDashing = false;
 
 	private ParticleManager _particleManager;
 	private Rigidbody _rigidbody;
 	private XboxControllerManager _xboxControllerManager;
+    private CharacterAnimationController _animationController;
 
 	void Start(){
 		_xboxControllerManager = XboxControllerManager.Instance;
+        _animationController = GetComponent<CharacterAnimationController>();
 		_rigidbody = GetComponent<Rigidbody>();
 
 		_particleManager = ParticleManager.Instance;
@@ -32,38 +36,48 @@ public class CharacterMovement : Character {
 
 	#region Update
 	void FixedUpdate(){
+        if (pIsStunned) {
+            IsDashing = false;
+
+            _rigidbody.velocity = Vector3.zero;
+            return;
+        }
 		float tSpeed = Time.deltaTime * _speed;
-		Vector3 tDirection = _xboxControllerManager.GetLeftStickAxis(base.pPlayerInformation) *tSpeed;
+		Velocity = _xboxControllerManager.GetLeftStickAxis(base.pPlayerInformation) *tSpeed;
 
-		if(_xboxControllerManager.GetButtonPressed(base.pPlayerInformation,_dashButton) && !_isDashCooldown && !_isDashing){
-			_isDashing = true;
+		if(_xboxControllerManager.GetButtonPressed(base.pPlayerInformation,_dashButton) && !_isDashCooldown && !IsDashing){
+			IsDashing = true;
 		}
-		if(_isDashing)
-			tDirection = Dash(tDirection);
+		if(IsDashing)
+            Dash();
 
-		_rigidbody.velocity = tDirection;
+		_rigidbody.velocity = Velocity;
 
-		if(tDirection.sqrMagnitude > 0.0f)
-			transform.forward = Vector3.Normalize(tDirection);
+        if (Velocity.sqrMagnitude > 0.0f)
+        {
+            _particleManager.SpawnParticleAssignedToObject(ParticleType.WALK + pPlayerInformation.PlayerID, this.transform);
+            transform.forward = Vector3.Normalize(Velocity);
+        }
 	}
 
-	private Vector3 Dash(Vector3 iDirection){
+	private void Dash(){
+
 		_particleManager.SpawnParticleAssignedToObject(ParticleType.DASH+pPlayerInformation.PlayerID,this.transform);
 		//Dash behaviour
 		_dashCount+=Time.deltaTime;
 		if(_dashCount>= _dashLengthSeconds){
 			_dashCount = 0.0f;
-			_isDashing = false;
+			IsDashing = false;
 			_isDashCooldown = true;
         }
 
         float tSpeed = Time.deltaTime * _dashSpeed;
-        iDirection = transform.forward* tSpeed;
-		return iDirection;
+        Velocity = transform.forward* tSpeed;
 	}
 
 	void Update(){
 		if(_isDashCooldown){
+        base.pIsStunned = false;
 			_dashCooldown+=Time.deltaTime;
 			if(_dashCooldown>= _dashCooldownInSeconds){
 				_dashCooldown = 0.0f;
@@ -80,13 +94,18 @@ public class CharacterMovement : Character {
 
         if (iCollision.impulse.magnitude > 4000)
 			iCollision.gameObject.SendMessage("OnHit", tHitPosition, SendMessageOptions.DontRequireReceiver);
-		if(!_isDashing)
+		if(!IsDashing)
 			return;
-		_isDashing = false;
-		iCollision.gameObject.SendMessage("OnDashHit", tHitPosition, SendMessageOptions.DontRequireReceiver);
-	}
+		iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
+        IsDashing = false;
+    }
 
     void OnCollisionStay(Collision iCollision) {
-
+        if (iCollision.gameObject.GetComponent<Character>() != null) {
+            if (!IsDashing)
+                return;
+            iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
+            IsDashing = false;
+        }
     }
 }

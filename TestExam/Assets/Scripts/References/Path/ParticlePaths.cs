@@ -12,7 +12,15 @@ namespace Exam.Reference.Path{
 			"Particles/Dash",
 			"Particles/Dash",
 			"Particles/Dash_Hit_Wall",
-		};
+            "Particles/Walk",
+            "Particles/Walk",
+            "Particles/Walk",
+            "Particles/Walk",
+            "Particles/Stunned",
+            "Particles/Stunned",
+            "Particles/Stunned",
+            "Particles/Stunned",
+        };
 	}
 }
 /// <summary>
@@ -25,4 +33,12 @@ public enum ParticleType
     DASH2 = 2,
     DASH3 = 3,
     DASH_HIT_WALL = 4,
+    WALK = 5,
+    WALK1 = 6,
+    WALK2 = 7,
+    WALK3 = 8,
+    STUNNED = 9,
+    STUNNED1 = 10,
+    STUNNED2 = 11,
+    STUNNED3 = 12,
 }

@@ -19,12 +19,12 @@ public class ItemImageSelect : MonoBehaviour {
         int tCompleteItem;
         int tMaterial0;
         int tMaterial1;
-        if (iRecipe.whatItemWillIBecome == Items.sword) {
+        if (iRecipe.whatItemWillIBecome == Items.SWORD) {
             tCompleteItem = 0;
             tMaterial0 = 0;
             tMaterial1 = 0;
         }
-        else if (iRecipe.whatItemWillIBecome == Items.shield) {
+        else if (iRecipe.whatItemWillIBecome == Items.SHIELD) {
             tCompleteItem = 1;
             tMaterial0 = 0;
             tMaterial1 = 1;
