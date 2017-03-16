@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Scores : MonoBehaviour {
+public class Scores : Singleton<Scores> {
 
     [SerializeField]
     private int _maxScore;
     [SerializeField]
     private Text _scoreText;
+    [SerializeField]
+    private FinishGame _finishGame;
 
     public int CurrentScore { get; private set; }
     public int MaxScore { get; private set; }
@@ -23,6 +25,9 @@ public class Scores : MonoBehaviour {
     public void FinishedItem() {
         CurrentScore++;
         _scoreText.text = CurrentScore + "/" + MaxScore;
+        if(CurrentScore == MaxScore) {
+            _finishGame.GameFinished();
+        }
     }
 
     /// <summary>

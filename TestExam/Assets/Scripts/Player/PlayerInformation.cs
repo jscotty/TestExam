@@ -12,7 +12,10 @@ public class PlayerInformation {
     /// Stored character path references, which can be collected by a character type enumaration
     /// </summary>
     private Dictionary<CharacterType, string> _characterReference = new Dictionary<CharacterType, string>() {
-        { CharacterType.CUBE, CharacterPaths.CHARACTER }
+        { CharacterType.CHARACTER_BLUE, CharacterPaths.CHARACTER_BLUE },
+        { CharacterType.CHARACTER_GREEN, CharacterPaths.CHARACTER_GREEN },
+        { CharacterType.CHARACTER_RED, CharacterPaths.CHARACTER_RED },
+        { CharacterType.CHARACTER_YELLOW, CharacterPaths.CHARACTER_YELLOW },
     };
 
     /// <summary>
@@ -62,7 +65,7 @@ public class PlayerInformation {
 		get{ return PlayerState.IsConnected; }
 	}
 
-	public PlayerInformation Init(PlayerIndex iPlayerIndex, CharacterType iCharacterType = CharacterType.CUBE){
+	public PlayerInformation Init(PlayerIndex iPlayerIndex, CharacterType iCharacterType = CharacterType.CHARACTER_YELLOW){
 		this.PlayerIndex = iPlayerIndex;
         this.SelectedCharacterPath = _characterReference[iCharacterType];
 		return this;

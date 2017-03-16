@@ -31,7 +31,7 @@ public class PlayerSpawner : MonoBehaviour
         for(int i = 0; i < _playerManager.Players.Count; i++)
         {
             PlayerInformation tPlayer = _playerManager.Players[i];
-            GameObject tCharacter = (GameObject)Resources.Load(tPlayer.SelectedCharacterPath+tPlayer.PlayerID);
+            GameObject tCharacter = (GameObject)Resources.Load(tPlayer.SelectedCharacterPath);
             // stop if nothing found
             if (tCharacter == null) {
                 Debug.LogError("Could not find given character path!");
@@ -39,7 +39,11 @@ public class PlayerSpawner : MonoBehaviour
             }
 
             tCharacter = (GameObject)Instantiate(tCharacter);
-            tCharacter.GetComponent<Character>().Init(tPlayer);
+            Character[] tCharacterScripts =  tCharacter.GetComponentsInChildren<Character>();
+            for (int j = 0; j < tCharacterScripts.Length; j++)
+            {
+                tCharacterScripts[j].Init(tPlayer);
+            }
             int tIndex = i;
             if (tIndex > _spawnPoints.Count)
                 tIndex = 0;

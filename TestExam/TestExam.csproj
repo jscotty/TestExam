@@ -73,12 +73,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
     <Reference Include="XInputDotNetPure">
       <HintPath>Assets\XInputDotNet\x86_64\XInputDotNetPure.dll</HintPath>
     </Reference>
@@ -86,20 +80,33 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ambiance.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterItemCollider.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterItemController.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
-    <Compile Include="Assets\Scripts\DashHit.cs" />
+    <Compile Include="Assets\Scripts\DashHitCharacter.cs" />
+    <Compile Include="Assets\Scripts\DashHitObject.cs" />
+    <Compile Include="Assets\Scripts\DestroyWhenFinished.cs" />
+    <Compile Include="Assets\Scripts\Hardware\Controller\IController.cs" />
+    <Compile Include="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" />
     <Compile Include="Assets\Scripts\Items\Anvil.cs" />
     <Compile Include="Assets\Scripts\Items\Forge.cs" />
     <Compile Include="Assets\Scripts\Items\Ingot.cs" />
+    <Compile Include="Assets\Scripts\Items\InteractInterface.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
     <Compile Include="Assets\Scripts\Items\Recipe.cs" />
     <Compile Include="Assets\Scripts\Items\RecipeHolder.cs" />
+    <Compile Include="Assets\Scripts\Items\RockyTestItemConversion.cs" />
     <Compile Include="Assets\Scripts\Items\UpgradeItemBase.cs" />
     <Compile Include="Assets\Scripts\Items\WoodWorking.cs" />
+    <Compile Include="Assets\Scripts\Particle\ParticleInformation.cs" />
+    <Compile Include="Assets\Scripts\Particle\ParticleManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInformation.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\References\Names\ControllerInput.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSpawner.cs" />
+    <Compile Include="Assets\Scripts\References\Path\CharacterPaths.cs" />
+    <Compile Include="Assets\Scripts\References\Path\ParticlePaths.cs" />
     <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
@@ -107,7 +114,6 @@
     <Compile Include="Assets\Scripts\UI\InGame\ItemsToBuild.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
-    <Compile Include="Assets\Scripts\Xbox\XboxControllerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\OutlineCol.shader" />

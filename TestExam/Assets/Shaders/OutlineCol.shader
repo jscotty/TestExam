@@ -1,93 +1,89 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
-Shader "Outline/Unlit Colored"
+Shader "Outline/Unlit Textured outlined"
 {
-	Properties {
-	// shader properties
-		_Color ("Color", Color) = (1,1,1,1) // main color
-		_Outline ("outline strength", Range(0.0,5)) = 0.01 // outline strength
-		_OutlineColor ("Outline color", Color) = (0,0,0,0) // outline color
-		[MaterialToggle] _IsCube("IsCube", float) = 0 // for normal calculations
+	Properties{
+		_MainTex("Texture", 2D) = "white" {}
+	_Outline("outline strength", Range(0.0,0.25)) = 0.01
+		_OutlineColor("Outline color", Color) = (0,0,0,0)
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
+		SubShader{
+		Tags{ "RenderType" = "Opaque" }
+		LOD 100
 
-		Pass {
-		// outline pass
-			Cull Front // cull front, only need black backface.
+		Pass{
+		Cull Front
 
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			
-			#include "UnityCG.cginc"
+		CGPROGRAM
+#pragma vertex vert
+#pragma fragment frag
 
-			struct appdata { // model data struct.
-				float4 vertex : POSITION;
-				float4 normal : NORMAL;
-			};
+#include "UnityCG.cginc"
 
-			struct v2f { // model render data struct.
-				float4 vertex : POSITION;
-				float4 color : COLOR;
-			};
+		struct appdata {
+		float4 vertex : POSITION;
+		float4 normal : NORMAL;
+	};
 
-       		//standard properties
-	        fixed _Outline;
-	        fixed4 _OutlineColor;
-	        float _IsCube;
-			
-			v2f vert (appdata v) { 
-			//vertex calculations
-	        	float3 norm = normalize( v.normal);
-	        	if(_IsCube > 0.5)
-	        		v.vertex.xyz *= (1 + _Outline); // multiply vertex positions with outline strength
-	        	else
-	        		v.vertex.xyz += (norm + _Outline); // multiply vertex positions with outline strength
+	struct v2f {
+		float4 vertex : SV_POSITION;
+	};
 
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // multiply view and projection matrix
-	        	o.color = _OutlineColor;
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : COLOR {
-				return i.color; // return given outline color.
-			}
-			ENDCG
-		}
+	sampler2D _MainTex;
+	float4 _MainTex_ST;
+	fixed _Outline;
+	fixed4 _OutlineColor;
 
-		Pass {
-		// model color pass
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma multi_compile_fwdbase
-			
-			#include "UnityCG.cginc"
+	v2f vert(appdata v) {
+		float3 norm = normalize(v.normal);
+		v.vertex.xyz += norm * _Outline;
 
-			struct appdata { // model data struct
-				float4 vertex : POSITION;
-			};
+		v2f o;
+		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+		return o;
+	}
 
-			struct v2f {
-				float4 vertex : SV_POSITION;
-			};
+	fixed4 frag(v2f i) : SV_Target{
+		return _OutlineColor;
+	}
+		ENDCG
+	}
 
-       		//standard properties
-			fixed4 _Color;
-			
-			v2f vert (appdata v) {
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // multiply view and projection matrix 
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : COLOR {
-				return _Color;
-			}
-			ENDCG
-		}
+		Pass{
+
+		CGPROGRAM
+#pragma vertex vert
+#pragma fragment frag
+
+#include "UnityCG.cginc"
+
+		struct appdata {
+		float4 vertex : POSITION;
+		float2 uv : TEXCOORD0;
+	};
+
+	struct v2f {
+		float2 uv : TEXCOORD0;
+		float4 vertex : SV_POSITION;
+	};
+
+	sampler2D _MainTex;
+	float4 _MainTex_ST;
+
+	v2f vert(appdata v) {
+
+		v2f o;
+		o.vertex = UnityObjectToClipPos(v.vertex);
+		o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+		return o;
+	}
+
+	fixed4 frag(v2f i) : SV_Target{
+		fixed4 col = tex2D(_MainTex, i.uv);
+	return col;
+	}
+		ENDCG
+	}
 	}
 }

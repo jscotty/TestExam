@@ -10,12 +10,17 @@ public class Character : MonoBehaviour {
 	protected PlayerInformation pPlayerInformation;
     protected bool pIsStunned = false;
 
-	public Character Init(PlayerInformation iPlayerInformation){
-		this.pPlayerInformation = iPlayerInformation;
-		return this;
-	}
+    protected XboxControllerManager pXboxControllerManager;
 
-	void Start(){
-		
-	}
+    public Character Init(PlayerInformation iPlayerInformation)
+    {
+        this.pPlayerInformation = iPlayerInformation;
+        pXboxControllerManager = XboxControllerManager.Instance;
+        return this;
+    }
+
+    public void Stun(bool iIsStunned)
+    {
+        this.pIsStunned = iIsStunned;
+    }
 }
