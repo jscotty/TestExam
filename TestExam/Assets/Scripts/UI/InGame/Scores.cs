@@ -9,6 +9,8 @@ public class Scores : MonoBehaviour {
     private int _maxScore;
     [SerializeField]
     private Text _scoreText;
+    [SerializeField]
+    private FinishGame _finishGame;
 
     public int CurrentScore { get; private set; }
     public int MaxScore { get; private set; }
@@ -23,6 +25,9 @@ public class Scores : MonoBehaviour {
     public void FinishedItem() {
         CurrentScore++;
         _scoreText.text = CurrentScore + "/" + MaxScore;
+        if(CurrentScore == MaxScore) {
+            _finishGame.GameFinished();
+        }
     }
 
     /// <summary>

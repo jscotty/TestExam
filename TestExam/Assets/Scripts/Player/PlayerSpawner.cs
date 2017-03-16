@@ -39,7 +39,11 @@ public class PlayerSpawner : MonoBehaviour
             }
 
             tCharacter = (GameObject)Instantiate(tCharacter);
-            tCharacter.GetComponent<Character>().Init(tPlayer);
+            Character[] tCharacterScripts =  tCharacter.GetComponentsInChildren<Character>();
+            for (int j = 0; j < tCharacterScripts.Length; j++)
+            {
+                tCharacterScripts[j].Init(tPlayer);
+            }
             int tIndex = i;
             if (tIndex > _spawnPoints.Count)
                 tIndex = 0;
