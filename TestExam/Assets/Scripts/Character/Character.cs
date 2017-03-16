@@ -9,13 +9,11 @@ public class Character : MonoBehaviour {
 
 	protected PlayerInformation pPlayerInformation;
     protected bool pIsStunned = false;
+    protected XboxControllerManager pXboxControllerManager;
 
-	public Character Init(PlayerInformation iPlayerInformation){
+    public Character Init(PlayerInformation iPlayerInformation){
 		this.pPlayerInformation = iPlayerInformation;
-		return this;
-	}
-
-	void Start(){
-		
+        pXboxControllerManager = XboxControllerManager.Instance;
+        return this;
 	}
 }

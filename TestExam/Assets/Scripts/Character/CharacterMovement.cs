@@ -21,10 +21,9 @@ public class CharacterMovement : Character {
 
 	private ParticleManager _particleManager;
 	private Rigidbody _rigidbody;
-	private XboxControllerManager _xboxControllerManager;
 
 	void Start(){
-		_xboxControllerManager = XboxControllerManager.Instance;
+		
 		_rigidbody = GetComponent<Rigidbody>();
 
 		_particleManager = ParticleManager.Instance;
@@ -33,9 +32,9 @@ public class CharacterMovement : Character {
 	#region Update
 	void FixedUpdate(){
 		float tSpeed = Time.deltaTime * _speed;
-		Vector3 tDirection = _xboxControllerManager.GetLeftStickAxis(base.pPlayerInformation) *tSpeed;
+		Vector3 tDirection = pXboxControllerManager.GetLeftStickAxis(base.pPlayerInformation) *tSpeed;
 
-		if(_xboxControllerManager.GetButtonPressed(base.pPlayerInformation,_dashButton) && !_isDashCooldown && !_isDashing){
+		if(pXboxControllerManager.GetButtonPressed(base.pPlayerInformation,_dashButton) && !_isDashCooldown && !_isDashing){
 			_isDashing = true;
 		}
 		if(_isDashing)
@@ -74,7 +73,7 @@ public class CharacterMovement : Character {
 	#endregion
 
 	void OnCollisionEnter(Collision iCollision){
-		Debug.Log(iCollision.impulse.magnitude);
+		//Debug.Log(iCollision.impulse.magnitude);
 
 		Vector3 tHitPosition = transform.position+(transform.forward);
 
@@ -87,6 +86,6 @@ public class CharacterMovement : Character {
 	}
 
     void OnCollisionStay(Collision iCollision) {
-        Debug.Log("collision stayed!" + iCollision.gameObject.name);
+        //Debug.Log("collision stayed!" + iCollision.gameObject.name);
     }
 }

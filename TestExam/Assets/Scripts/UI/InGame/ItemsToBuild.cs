@@ -33,13 +33,13 @@ public class ItemsToBuild : MonoBehaviour {
 #if UNITY_EDITOR
     private void Update() {
         if (Input.GetKeyDown(KeyCode.P)) {
-            Debug.Log(canHandInItem(Items.bow));
+            Debug.Log(canHandInItem(Items.BOW));
         }
         if (Input.GetKeyDown(KeyCode.O)) {
-            Debug.Log(canHandInItem(Items.shield));
+            Debug.Log(canHandInItem(Items.SHIELD));
         }
         if (Input.GetKeyDown(KeyCode.I)) {
-            Debug.Log(canHandInItem(Items.sword));
+            Debug.Log(canHandInItem(Items.SWORD));
         }
     }
 #endif

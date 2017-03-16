@@ -30,6 +30,9 @@ public class Anvil : UpgradeItemBase {
 
     public override void Interact(CharacterItemController iItemController)
     {
+#if UNITY_EDITOR
+        Debug.Log("interact anvil");
+#endif
         if (_isSomeoneInteracting)
         {
             return;
