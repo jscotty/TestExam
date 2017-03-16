@@ -37,6 +37,7 @@ public class DashHitCharacter : Character {
 
     IEnumerator Stunned() {
         Character[] tCharacters = GetComponentsInChildren<Character>();
+        Debug.Log(tCharacters.Length);
         for (int i = 0; i < tCharacters.Length; i++)
         {
             tCharacters[i].Stun(true);

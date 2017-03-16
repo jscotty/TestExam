@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Ambiance.cs" />
      <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterAnimationController.cs" />
+     <Compile Include="Assets\Scripts\Character\CharacterItemCollider.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterItemController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Character\DashHitCharacter.cs" />
@@ -82,6 +83,8 @@
      <Compile Include="Assets\Scripts\UI\InGame\ItemsToBuild.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
+     <Compile Include="Assets\Scripts\UI\VictoryScreen\FinishGame.cs" />
+     <Compile Include="Assets\Scripts\UI\VictoryScreen\VictoryScreen.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
      <None Include="Assets\Shaders\EdgeDetection.shader" />
  <Reference Include="UnityEngine.UI">
