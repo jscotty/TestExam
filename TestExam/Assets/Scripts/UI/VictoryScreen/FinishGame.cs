@@ -19,14 +19,7 @@ public class FinishGame : MonoBehaviour {
     /// </summary>
 	public void GameFinished() {
         GameObject tVictoryScreen = Instantiate(_victoryScreen, transform, false);
-        bool tSabotourWon;
-        if((_gameTimer.Seconds > 0 || _gameTimer.Minutes > 0) && _scores.CurrentScore < (_scores.MaxScore / 2)) {
-            tSabotourWon = true;
-        }
-        else {
-            tSabotourWon = false;
-        }
-        tVictoryScreen.GetComponentInChildren<VictoryScreen>().SetVictoryScreen(tSabotourWon, _scores.CurrentScore, _scores.MaxScore, _gameTimer.Minutes, _gameTimer.Seconds, _gameTimer.MaxMinutes, _gameTimer.MaxSeconds);
+        tVictoryScreen.GetComponentInChildren<VictoryScreen>().SetVictoryScreen();
         for (int i = 0; i < _scriptsToTurnOff.Count; i++) {
             _scriptsToTurnOff[i].enabled = false;
         }
