@@ -64,17 +64,12 @@ public class ItemsToBuild : MonoBehaviour {
     /// <returns></returns>
     public bool canHandInItem(Items iItem) {
         for (int item = 0; item < _currentItems.Count; item++) {
-            Debug.Log(_currentItems[item]);
             if (_currentItems[item] == iItem) {
                 GameObject tRecipe = _currentRecipes[item];
                 _currentRecipes.RemoveAt(item);
                 Destroy(tRecipe);
-
                 _currentItems.RemoveAt(item);
                 _scores.FinishedItem();
-                if (_scores.CurrentScore == _scores.MaxScore) {
-                    FinishedGame();
-                }
                 StartCoroutine(WaitBeforeRecipe(5));
                 return true;
             }
@@ -82,7 +77,10 @@ public class ItemsToBuild : MonoBehaviour {
         return false;
     }
 
-    public void FinishedGame() {
-        Debug.Log("Game Finished, " + _scores.CurrentScore + " out of " + _scores.MaxScore + " recipes completed");
+    /// <summary>
+    /// Stops all coroutines when the object gets disabled
+    /// </summary>
+    private void OnDisable() {
+        StopAllCoroutines();
     }
 }
