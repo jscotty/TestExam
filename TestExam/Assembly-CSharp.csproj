@@ -79,11 +79,13 @@
      <Compile Include="Assets\Scripts\Sound\SoundPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\UI\GameInfoTracker.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\ItemImageSelect.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\ItemsToBuild.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
+     <Compile Include="Assets\Scripts\UI\PauseScreen.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\FinishGame.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\VictoryScreen.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
