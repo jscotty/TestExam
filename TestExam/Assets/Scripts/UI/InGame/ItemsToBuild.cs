@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemsToBuild : MonoBehaviour {
 
@@ -32,13 +31,13 @@ public class ItemsToBuild : MonoBehaviour {
 
 #if UNITY_EDITOR
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.L)) {
             Debug.Log(canHandInItem(Items.BOW));
         }
-        if (Input.GetKeyDown(KeyCode.O)) {
+        if (Input.GetKeyDown(KeyCode.K)) {
             Debug.Log(canHandInItem(Items.SHIELD));
         }
-        if (Input.GetKeyDown(KeyCode.I)) {
+        if (Input.GetKeyDown(KeyCode.J)) {
             Debug.Log(canHandInItem(Items.SWORD));
         }
     }

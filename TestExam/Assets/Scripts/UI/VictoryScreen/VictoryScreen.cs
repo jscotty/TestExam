@@ -6,29 +6,26 @@ using UnityEngine.UI;
 public class VictoryScreen : MonoBehaviour {
 
     [SerializeField]
-    private Text _text;
+    private List<Text> _scoreText = new List<Text>();
+    [SerializeField]
+    private List<Text> _totalScores = new List<Text>();
+    [SerializeField]
+    private List<GameObject> _playerPortraits = new List<GameObject>();
+    [SerializeField]
+    private List<Image> _scorePlates = new List<Image>(4);
+    [SerializeField]
+    private Sprite _mvpPlate;
+    
 
-    /// <summary>
-    /// Sets the text for the victory screen
-    /// </summary>
-    /// <param name="iSaboteurWon"></param>
-    /// <param name="iCurrentScore"></param>
-    /// <param name="iMaxScore"></param>
-    /// <param name="iMinutesRemaining"></param>
-    /// <param name="iSecondRemaining"></param>
-    /// <param name="iMaxMinutes"></param>
-    /// <param name="iMaxSeconds"></param>
-	public void SetVictoryScreen(bool iSaboteurWon, int iCurrentScore, int iMaxScore, int iMinutesRemaining, int iSecondRemaining, int iMaxMinutes, int iMaxSeconds) {
-        if (iSaboteurWon) {
-            _text.text = "Saboteur won with sabotaging " + iCurrentScore + " of the " + iMaxScore + " orders";
-        }
-        else {
-            if(iMinutesRemaining == 0 && iSecondRemaining == 0) {
-                _text.text = "Order makers won with getting " + iCurrentScore + " of the " + iMaxScore + " orders done in time";
-            }
-            else {
-                _text.text = "Order makers won with getting " + iCurrentScore + " of the " + iMaxScore + " orders with " +iMinutesRemaining + ":" + iSecondRemaining + " left";
-            }
+	public void SetVictoryScreen() {
+        int tSaboteur = Random.Range(0, 5);
+        _playerPortraits[tSaboteur].transform.Translate(Vector2.up * 50);
+        List<int> tRecipeScores = GameInfoTracker.Instance._playerScores;
+        List<int> tSaboteurScores = GameInfoTracker.Instance._SaboteurScores;
+
+        for (int i = 0; i < 4; i++) {
+            _scoreText[i].text = tRecipeScores[i] + "\n" + tSaboteurScores[i];
+            _totalScores[i].text = (tRecipeScores[i] + tSaboteurScores[i]).ToString();
         }
     }
 }
