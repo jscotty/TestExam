@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\References\Path\ParticlePaths.cs" />
      <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
      <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
+     <Compile Include="Assets\Scripts\Sound\SoundPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
