@@ -80,16 +80,18 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ambiance.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterAnimationController.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterItemCollider.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterItemController.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterMovement.cs" />
-    <Compile Include="Assets\Scripts\DashHitCharacter.cs" />
+    <Compile Include="Assets\Scripts\Character\DashHitCharacter.cs" />
     <Compile Include="Assets\Scripts\DashHitObject.cs" />
-    <Compile Include="Assets\Scripts\DestroyWhenFinished.cs" />
+    <Compile Include="Assets\Scripts\EdgeDetectionController.cs" />
     <Compile Include="Assets\Scripts\Hardware\Controller\IController.cs" />
     <Compile Include="Assets\Scripts\Hardware\Controller\Xbox\XboxControllerManager.cs" />
     <Compile Include="Assets\Scripts\Items\Anvil.cs" />
     <Compile Include="Assets\Scripts\Items\Forge.cs" />
+    <Compile Include="Assets\Scripts\Items\GetBaseResource.cs" />
     <Compile Include="Assets\Scripts\Items\Ingot.cs" />
     <Compile Include="Assets\Scripts\Items\InteractInterface.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
@@ -109,13 +111,18 @@
     <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\PlayerSelection.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterSelectionScreen\SceneLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\GameInfoTracker.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\GameTimer.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\ItemImageSelect.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\ItemsToBuild.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseScreen.cs" />
+    <Compile Include="Assets\Scripts\UI\VictoryScreen\FinishGame.cs" />
+    <Compile Include="Assets\Scripts\UI\VictoryScreen\VictoryScreen.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\EdgeDetection.shader" />
     <None Include="Assets\Shaders\OutlineCol.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

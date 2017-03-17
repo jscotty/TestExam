@@ -8,6 +8,8 @@ public class Anvil : UpgradeItemBase {
     public GameObject bowHandout;
     public GameObject shieldHandout;
     public GameObject swordHandout;
+
+    public GameObject itemOnAnilPosition;
     private bool _isSomeoneInteracting = false;
 
     public override void PutItemIn(ItemBase iItemType, CharacterItemController iPlayerInfo)
@@ -16,6 +18,10 @@ public class Anvil : UpgradeItemBase {
         if (itemOne == null)
         {
             itemOne = iItemType;
+            itemOne.transform.parent = this.transform;
+            itemOne.transform.position = itemOnAnilPosition.transform.position;
+            itemOne.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            iPlayerInfo.RemoveItem();
         }
         else if (itemOne.WhatItemTierAmI == ItemTiers.TIER2 && iItemType.WhatItemTierAmI == ItemTiers.TIER2)
         {
@@ -24,6 +30,15 @@ public class Anvil : UpgradeItemBase {
             {
                 _isSomeoneInteracting = true;
                 CreateRecipe(tRecipeToMake);
+                iPlayerInfo.RemoveItem();
+                Destroy(itemOne.gameObject);
+                Destroy(iItemType.gameObject);
+                ClearAnvilItem();
+                ItemBase tItemBase = CollectHandout().GetComponentInChildren<ItemBase>();
+#if UNITY_EDITOR
+                Debug.Log(tItemBase);
+#endif
+                iPlayerInfo.PickItemUp(tItemBase);
             }
         }
     }
@@ -64,6 +79,11 @@ public class Anvil : UpgradeItemBase {
     {
         _isSomeoneInteracting = false;
         return base.CollectHandout();
+    }
+
+    public void ClearAnvilItem()
+    {
+        itemOne = null;
     }
 
 }
