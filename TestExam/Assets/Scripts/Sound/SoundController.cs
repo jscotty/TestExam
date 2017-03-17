@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundController : Singleton<SoundController> {
-    
-    [SerializeField]
-    private GameObject _audioPlayer;
 
     private List<string> _currentSounds = new List<string>();
     private List<AudioSource> _currentAudioSources = new List<AudioSource>();
+
+    void Awake() {
+        this.gameObject.AddComponent<AudioSource>();
+    }
 
     /// <summary>
     /// plays a sound when called
@@ -17,8 +18,8 @@ public class SoundController : Singleton<SoundController> {
     /// <param name="iRepeating"></param>
     /// <param name="iParentForSound"></param>
     /// <param name="iStringForDestroy"></param>
-    public void PlaySound(AudioClip iSound, bool iRepeating, Transform iParentForSound, string iStringForDestroy = "") {
-        AudioSource tAudioSource = Instantiate(_audioPlayer, iParentForSound).GetComponent<AudioSource>();
+    public void PlaySound(AudioClip iSound, bool iRepeating, string iStringForDestroy = "") {
+        AudioSource tAudioSource = Instantiate(this.gameObject).GetComponent<AudioSource>();
         tAudioSource.loop = iRepeating;
         tAudioSource.clip = iSound;
         tAudioSource.Play();
