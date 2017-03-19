@@ -118,6 +118,7 @@ public class CharacterMovement : Character
             return;
         iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
         IsDashing = false;
+        _isDashCooldown = true;
     }
 
     void OnCollisionStay(Collision iCollision)
@@ -128,6 +129,7 @@ public class CharacterMovement : Character
                 return;
             iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
             IsDashing = false;
+            _isDashCooldown = true;
         }
     }
 }

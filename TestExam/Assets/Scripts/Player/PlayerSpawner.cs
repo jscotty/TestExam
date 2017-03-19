@@ -13,6 +13,7 @@ public class PlayerSpawner : MonoBehaviour
 
     void Start()
     {
+        int tRandomSaboteur = Random.Range(0,3);
         this.Players = new List<GameObject>();
 
         _playerManager = PlayerManager.Instance.Init();
@@ -31,6 +32,7 @@ public class PlayerSpawner : MonoBehaviour
         for(int i = 0; i < _playerManager.Players.Count; i++)
         {
             PlayerInformation tPlayer = _playerManager.Players[i];
+            if (i.Equals(tRandomSaboteur)) tPlayer.isSaboteur = true;
             GameObject tCharacter = (GameObject)Resources.Load(tPlayer.SelectedCharacterPath);
             // stop if nothing found
             if (tCharacter == null) {

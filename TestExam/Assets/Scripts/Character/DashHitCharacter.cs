@@ -37,13 +37,12 @@ public class DashHitCharacter : Character {
         if (pIsStunned) {
             Vector3 tParticlePosition = transform.position;
             tParticlePosition.y += _playerHeight;
-            _particleManager.SpawnParticle(ParticleType.STUNNED + pPlayerInformation.PlayerID, tParticlePosition);
+            _particleManager.SpawnParticle(ParticleType.STUNNED + 0, tParticlePosition);
         }
     }
 
     IEnumerator Stunned() {
         Character[] tCharacters = GetComponentsInChildren<Character>();
-        Debug.Log(tCharacters.Length);
         for (int i = 0; i < tCharacters.Length; i++)
         {
             tCharacters[i].Stun(true);
