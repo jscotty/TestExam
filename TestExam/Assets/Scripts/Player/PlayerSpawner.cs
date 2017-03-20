@@ -28,7 +28,6 @@ public class PlayerSpawner : MonoBehaviour
         {
             _spawnPoints.Add(this.gameObject);
         }
-
         for(int i = 0; i < _playerManager.Players.Count; i++)
         {
             PlayerInformation tPlayer = _playerManager.Players[i];

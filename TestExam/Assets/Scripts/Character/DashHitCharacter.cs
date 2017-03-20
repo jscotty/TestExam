@@ -34,25 +34,25 @@ public class DashHitCharacter : Character {
     }
 
     void Update() {
+        Stun();
         if (pIsStunned) {
             Vector3 tParticlePosition = transform.position;
             tParticlePosition.y += _playerHeight;
-            _particleManager.SpawnParticle(ParticleType.STUNNED + 0, tParticlePosition);
+            _particleManager.SpawnParticle(ParticleType.STUNNED + pPlayerInformation.PlayerID, tParticlePosition);
+        }
+    }
+
+    void Stun()
+    {
+        Character[] tCharacters = GetComponentsInChildren<Character>();
+        for (int i = 0; i < tCharacters.Length; i++)
+        {
+            tCharacters[i].Stun(pIsStunned);
         }
     }
 
     IEnumerator Stunned() {
-        Character[] tCharacters = GetComponentsInChildren<Character>();
-        for (int i = 0; i < tCharacters.Length; i++)
-        {
-            tCharacters[i].Stun(true);
-        }
         yield return new WaitForSeconds(_stunTime);
         pIsStunned = false;
-
-        for (int i = 0; i < tCharacters.Length; i++)
-        {
-            tCharacters[i].Stun(false);
-        }
     }
 }

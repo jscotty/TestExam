@@ -37,7 +37,7 @@ public class PlayerSelectionButtonIdentifier : MonoBehaviour {
         for (int i = 0; i < _playerManager.Players.Count; i++)
         {
             if(_buttons[i].color.a == 0.0f)
-                _buttons[i].color = new Color(1, 1, 1, 1);
+                _buttons[i].color = new Color(1, 1, 1, 1); // player is connected so show button!
 
             PlayerInformation tPlayerInfo = _playerManager.Players[i];
             Sprite tSprite;
