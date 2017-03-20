@@ -43,7 +43,7 @@ public class UpgradeItemBase : MonoBehaviour, IInteract
     public virtual GameObject CollectHandout()
     {
         
-        return Instantiate(pObjecToHandOut);
+        return Instantiate(pObjecToHandOut,transform.position,Quaternion.identity);
     }
 
     public virtual void Interact(CharacterItemController iItemController)

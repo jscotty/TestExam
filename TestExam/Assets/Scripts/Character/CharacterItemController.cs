@@ -64,6 +64,11 @@ public class CharacterItemController : Character {
                 tInteractable = tOverlapcapsulehits[i].GetComponent<IInteract>();
                 if (tInteractable != null && tInteractable != itemIAmHolding)
                 {
+                    if (tInteractable.GetType() == typeof(ItemBase) && amIHoldingAnItem)
+                    {
+                        tInteractable = null;
+                        continue;
+                    }
                     tInteractable.Interact(this);
                     break;
                 }

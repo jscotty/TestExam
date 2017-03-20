@@ -19,6 +19,8 @@ public class CharacterMovement : Character
     private float _dashLengthSeconds = 1.0f;
     [SerializeField]
     private ButtonType _dashButton;
+    [SerializeField]
+    private AudioClip _dashClip;
 
     public bool IsDashing { get; private set; }
     public Vector3 Velocity { get; private set; }
@@ -30,11 +32,13 @@ public class CharacterMovement : Character
     private ParticleManager _particleManager;
     private Rigidbody _rigidbody;
     private CharacterAnimationController _animationController;
+    private SoundController _soundController;
 
     void Start()
     {
         _animationController = GetComponent<CharacterAnimationController>();
         _rigidbody = GetComponent<Rigidbody>();
+        _soundController = SoundController.Instance;
 
         _particleManager = ParticleManager.Instance;
     }
@@ -54,6 +58,8 @@ public class CharacterMovement : Character
 
         if (pXboxControllerManager.GetButtonPressed(base.pPlayerInformation, _dashButton) && !_isDashCooldown && !IsDashing)
         {
+            if (_dashClip != null)
+                _soundController.PlaySound(_dashClip, false);
             IsDashing = true;
         }
         if (IsDashing)
@@ -112,6 +118,7 @@ public class CharacterMovement : Character
             return;
         iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
         IsDashing = false;
+        _isDashCooldown = true;
     }
 
     void OnCollisionStay(Collision iCollision)
@@ -122,6 +129,7 @@ public class CharacterMovement : Character
                 return;
             iCollision.gameObject.SendMessage("OnDashHit", iCollision.impulse.magnitude, SendMessageOptions.DontRequireReceiver);
             IsDashing = false;
+            _isDashCooldown = true;
         }
     }
 }

@@ -9,25 +9,32 @@ public class DashHitCharacter : Character {
 
     [SerializeField]
     private float _stunTime = 2.0f;
+    [SerializeField]
+    private AudioClip _dashHitClip;
 
     private float _playerHeight = 2.0f;
 
     private float _time = 0.0f;
     private ParticleManager _particleManager;
+    private SoundController _soundController;
 
     void Start() {
         _particleManager = ParticleManager.Instance;
+        _soundController = SoundController.Instance;
     }
 
     void OnDashHit(float iImpulse) {
         if (pIsStunned)
             return;
         pIsStunned = true;
+        if (_dashHitClip != null)
+            _soundController.PlaySound(_dashHitClip, false);
         StartCoroutine(Stunned());
         
     }
 
     void Update() {
+        Stun();
         if (pIsStunned) {
             Vector3 tParticlePosition = transform.position;
             tParticlePosition.y += _playerHeight;
@@ -35,19 +42,17 @@ public class DashHitCharacter : Character {
         }
     }
 
-    IEnumerator Stunned() {
+    void Stun()
+    {
         Character[] tCharacters = GetComponentsInChildren<Character>();
-        Debug.Log(tCharacters.Length);
         for (int i = 0; i < tCharacters.Length; i++)
         {
-            tCharacters[i].Stun(true);
+            tCharacters[i].Stun(pIsStunned);
         }
+    }
+
+    IEnumerator Stunned() {
         yield return new WaitForSeconds(_stunTime);
         pIsStunned = false;
-
-        for (int i = 0; i < tCharacters.Length; i++)
-        {
-            tCharacters[i].Stun(false);
-        }
     }
 }
