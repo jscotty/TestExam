@@ -14,6 +14,13 @@
             { CharacterType.CHARACTER_GREEN, CHARACTER_GREEN },
             { CharacterType.CHARACTER_BLUE, CHARACTER_BLUE },
         };
+
+        public static readonly Dictionary<string, CharacterType> CHARACTER_COLOR = new Dictionary<string, CharacterType>() {
+            { CHARACTER_YELLOW, CharacterType.CHARACTER_YELLOW },
+            { CHARACTER_RED, CharacterType.CHARACTER_RED },
+            { CHARACTER_GREEN, CharacterType.CHARACTER_GREEN },
+            { CHARACTER_BLUE, CharacterType.CHARACTER_BLUE },
+        };
     }
 }
 
