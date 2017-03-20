@@ -13,7 +13,16 @@ public class WoodWorking : UpgradeItemBase
         base.PutItemIn(iItemType, iPlayerInfo);
         if (iItemType.whatItemAmI == requestedItem)
         {
-            //TODO start craft animation
+            Destroy(iItemType.gameObject);
+            iPlayerInfo.RemoveItem();
+            GameObject tItem = CollectHandout();
+            iPlayerInfo.PickItemUp(tItem.GetComponentInChildren<ItemBase>());
         }
+    }
+
+    public override void Interact(CharacterItemController iItemController)
+    {
+        base.Interact(iItemController);
+        PutItemIn(iItemController.itemIAmHolding, iItemController);
     }
 }
