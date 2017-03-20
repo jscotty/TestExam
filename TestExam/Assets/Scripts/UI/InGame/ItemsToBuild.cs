@@ -32,13 +32,13 @@ public class ItemsToBuild : MonoBehaviour {
 #if UNITY_EDITOR
     private void Update() {
         if (Input.GetKeyDown(KeyCode.L)) {
-            Debug.Log(canHandInItem(Items.BOW));
+            Debug.Log(CanHandInItem(Items.BOW));
         }
         if (Input.GetKeyDown(KeyCode.K)) {
-            Debug.Log(canHandInItem(Items.SHIELD));
+            Debug.Log(CanHandInItem(Items.SHIELD));
         }
         if (Input.GetKeyDown(KeyCode.J)) {
-            Debug.Log(canHandInItem(Items.SWORD));
+            Debug.Log(CanHandInItem(Items.SWORD));
         }
     }
 #endif
@@ -61,13 +61,13 @@ public class ItemsToBuild : MonoBehaviour {
     /// </summary>
     /// <param name="iItem"></param>
     /// <returns></returns>
-    public bool canHandInItem(Items iItem) {
-        for (int item = 0; item < _currentItems.Count; item++) {
-            if (_currentItems[item] == iItem) {
-                GameObject tRecipe = _currentRecipes[item];
-                _currentRecipes.RemoveAt(item);
+    public bool CanHandInItem(Items iItem) {
+        for (int i = 0; i < _currentItems.Count; i++) {
+            if (_currentItems[i] == iItem) {
+                GameObject tRecipe = _currentRecipes[i];
+                _currentRecipes.RemoveAt(i);
                 Destroy(tRecipe);
-                _currentItems.RemoveAt(item);
+                _currentItems.RemoveAt(i);
                 _scores.FinishedItem();
                 StartCoroutine(WaitBeforeRecipe(5));
                 return true;

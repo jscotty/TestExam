@@ -45,9 +45,6 @@ public class Anvil : UpgradeItemBase {
 
     public override void Interact(CharacterItemController iItemController)
     {
-#if UNITY_EDITOR
-        Debug.Log("interact anvil");
-#endif
         if (_isSomeoneInteracting)
         {
             return;
@@ -56,6 +53,11 @@ public class Anvil : UpgradeItemBase {
         if (iItemController.amIHoldingAnItem)
         {
             PutItemIn(iItemController.itemIAmHolding, iItemController);
+        }
+        else if (itemOne != null)
+        {
+            iItemController.PickItemUp(itemOne);
+            ClearAnvilItem();
         }
     }
 

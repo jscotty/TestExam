@@ -108,7 +108,7 @@ public class CharacterMovement : Character
 
     void OnCollisionEnter(Collision iCollision)
     {
-        Debug.Log(iCollision.impulse.magnitude);
+       // Debug.Log(iCollision.impulse.magnitude);
 
         Vector3 tHitPosition = transform.position + (transform.forward);
 
