@@ -12,7 +12,7 @@ public class VictoryScreen : MonoBehaviour {
     [SerializeField]
     private List<GameObject> _playerObject = new List<GameObject>(4);
     [SerializeField]
-    private List<Image> _scorePlates = new List<Image>(4);
+    private List<GameObject> _scorePlates = new List<GameObject>(4);
     [SerializeField]
     private List<Image> _playerPortrait = new List<Image>(4);
     [SerializeField]
@@ -20,17 +20,28 @@ public class VictoryScreen : MonoBehaviour {
     [SerializeField]
     private List<Sprite> _victoryPortraitSprites = new List<Sprite>(4);
     [SerializeField]
-    private Sprite _mvpPlate;
+    private List<GameObject> _mvpPlates = new List<GameObject>(4);
     [SerializeField]
     private GameObject _loadingScreen;
+    [SerializeField]
+    private GameObject _continueButton;
 
     private PlayerManager _playerManager;
+    private XboxControllerManager _xboxControllerManager;
 
     private void Start() {
         _playerManager = PlayerManager.Instance;
+        _xboxControllerManager = XboxControllerManager.Instance;
+        GameInfoTracker.Instance.ResetScore();
+        GameInfoTracker.Instance.AddScore(3, 7, Random.Range(0, 4));
+        GameInfoTracker.Instance.AddScore(6, 4, Random.Range(0, 4));
+        GameInfoTracker.Instance.AddScore(2, 8, Random.Range(0, 4));
+        SetVictoryScreen();
     }
 
     public void SetVictoryScreen() {
+        StartCoroutine(SkipDelay());
+
         List<int> tRecipeScores = GameInfoTracker.Instance.PlayerScores;
         List<int> tSaboteurScores = GameInfoTracker.Instance.SaboteurScores;
         List<int> tTotalScores = new List<int>();
@@ -50,8 +61,9 @@ public class VictoryScreen : MonoBehaviour {
         if (GameInfoTracker.Instance.CurrentRound == 3) {
             for (int i = 0; i < 4; i++) {
                 if (tTotalScores[i] == tHighestScore) {
-                    _scorePlates[i].sprite = _mvpPlate;
-                    _playerObject[i].transform.Translate(Vector2.up * 100);
+                    _scorePlates[i].SetActive(false);
+                    _mvpPlates[i].SetActive(true);
+                    _playerObject[i].transform.Translate(Vector2.up * 70);
                     _playerPortrait[i].sprite = _playerSprite(CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath], true);
                 }
             }
@@ -79,12 +91,24 @@ public class VictoryScreen : MonoBehaviour {
             return _victoryPortraitSprites[tColour];
         }
     }
-    public void Continue() {
-        if(GameInfoTracker.Instance.CurrentRound != 3) {
-            Instantiate(_loadingScreen);
-        }
-        else {
-            gameObject.AddComponent<GoToScene>().GoToThisScene(2);
+    private bool _canContinue = false;
+    IEnumerator SkipDelay() {
+        yield return new WaitForSeconds(3);
+        _canContinue = true;
+        _continueButton.SetActive(true);
+    }
+    public void Update() {
+        if (_canContinue) {
+            for (int i = 0; i < _playerManager.Players.Count; i++) {
+                if (_xboxControllerManager.GetButtonPressed(_playerManager.Players[i], ButtonType.BUTTON_A)) {
+                    if (GameInfoTracker.Instance.CurrentRound != 3) {
+                        Instantiate(_loadingScreen);
+                    }
+                    else {
+                        gameObject.AddComponent<GoToScene>().GoToThisScene(2);
+                    }
+                }
+            }
         }
     }
 }
