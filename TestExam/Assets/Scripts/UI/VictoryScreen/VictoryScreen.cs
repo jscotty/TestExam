@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Exam.Reference.Path;
 public class VictoryScreen : MonoBehaviour {
 
     [SerializeField]
@@ -15,7 +15,15 @@ public class VictoryScreen : MonoBehaviour {
     private List<Image> _scorePlates = new List<Image>(4);
     [SerializeField]
     private Sprite _mvpPlate;
-    
+    [SerializeField]
+    private GameObject jkgjh;
+
+    private PlayerManager _playerManager;
+
+    private void Start() {
+        _playerManager = PlayerManager.Instance;
+    }
+
     public void SetVictoryScreen() {
         List<int> tRecipeScores = GameInfoTracker.Instance.PlayerScores;
         List<int> tSaboteurScores = GameInfoTracker.Instance.SaboteurScores;
@@ -24,7 +32,7 @@ public class VictoryScreen : MonoBehaviour {
         int tHighestScore = 0;
 
         for (int i = 0; i < 4; i++) {
-            Debug.Log(i);
+            CharacterType type = CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath];
             tTotalScores.Add(tRecipeScores[i] + tSaboteurScores[i]);
             _scoreText[i].text = tRecipeScores[i] + "\n" + tSaboteurScores[i];
             _totalScores[i].text = tTotalScores[i].ToString();
@@ -32,11 +40,18 @@ public class VictoryScreen : MonoBehaviour {
                 tHighestScore = tTotalScores[i];
             }
         }
-        for (int i = 0; i < 4; i++) {
-            if(tTotalScores[i] == tHighestScore) {
-                _scorePlates[i].sprite = _mvpPlate;
-                _playerPortraits[i].transform.Translate(Vector2.up * 100);
+        if (GameInfoTracker.Instance.CurrentRound == 3) {
+            for (int i = 0; i < 4; i++) {
+                if (tTotalScores[i] == tHighestScore) {
+                    _scorePlates[i].sprite = _mvpPlate;
+                    _playerPortraits[i].transform.Translate(Vector2.up * 100);
+                }
             }
+        }
+    }
+    public void Continue() {
+        if(GameInfoTracker.Instance.CurrentRound != 3) {
+
         }
     }
 }

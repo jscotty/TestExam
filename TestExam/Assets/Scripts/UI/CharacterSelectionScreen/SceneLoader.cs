@@ -9,6 +9,8 @@ public class SceneLoader : MonoBehaviour {
     private bool _destroyable = false;
     [SerializeField]
     private Text _loadingScreenText;
+    [SerializeField]
+    private GameObject _buttonImage;
 
     [SerializeField]
     private string _loadingScreenDoneText;
@@ -19,8 +21,8 @@ public class SceneLoader : MonoBehaviour {
     private void Start() {
         if (!_loadScene) {
             _loadScene = true;
-            StartCoroutine(LoadNewScene());
             DontDestroyOnLoad(transform.parent.gameObject);
+            StartCoroutine(LoadNewScene());
         }
     }
 
@@ -38,6 +40,7 @@ public class SceneLoader : MonoBehaviour {
         Debug.Log("Scene done loading");
         _destroyable = true;
         _loadingScreenText.text = _loadingScreenDoneText;
+        _buttonImage.SetActive(true);
     }
 
     /// <summary>
