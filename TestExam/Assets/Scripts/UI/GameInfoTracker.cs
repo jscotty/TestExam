@@ -10,8 +10,8 @@ public class GameInfoTracker : Singleton<GameInfoTracker> {
 
     public void ResetScore() {
         CurrentRound = 0;
-        PlayerScores.Clear();
-        SaboteurScores.Clear();
+        PlayerScores = new List<int>();
+        SaboteurScores = new List<int>();
         for (int i = 0; i < 4; i++) {
             PlayerScores.Add(0);
             SaboteurScores.Add(0);
