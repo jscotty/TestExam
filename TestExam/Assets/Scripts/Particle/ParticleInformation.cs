@@ -42,7 +42,8 @@ public class ParticleInformation {
 	public void SetParticlePosition(Vector3 iPosition){
 		this.Particle.transform.position = iPosition;
 
-		this.ParticleSystem.Play();
+        if(!this.ParticleSystem.isPlaying)
+		    this.ParticleSystem.Play();
 		Tick++;
 	}
 

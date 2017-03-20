@@ -9,19 +9,11 @@ using Exam.Reference.Path;
 public class PlayerInformation {
 
     /// <summary>
-    /// Stored character path references, which can be collected by a character type enumaration
-    /// </summary>
-    private Dictionary<CharacterType, string> _characterReference = new Dictionary<CharacterType, string>() {
-        { CharacterType.CHARACTER_BLUE, CharacterPaths.CHARACTER_BLUE },
-        { CharacterType.CHARACTER_GREEN, CharacterPaths.CHARACTER_GREEN },
-        { CharacterType.CHARACTER_RED, CharacterPaths.CHARACTER_RED },
-        { CharacterType.CHARACTER_YELLOW, CharacterPaths.CHARACTER_YELLOW },
-    };
-
-    /// <summary>
     /// get; private set;
     /// </summary>
     public PlayerIndex PlayerIndex { get; private set; }
+
+    public bool isSaboteur = false;
 
     /// <summary>
     /// Get player index int
@@ -57,6 +49,12 @@ public class PlayerInformation {
 	/// <value>The selected character path.</value>
 	public string SelectedCharacterPath{ get; private set; }
 
+    public void SetSelectedCharacterPath(CharacterType iCharacterType)
+    {
+        this.SelectedCharacterPath = CharacterPaths.CHARACTER_PATH[iCharacterType];
+        Debug.Log(CharacterPaths.CHARACTER_PATH[iCharacterType]);
+    }
+
 	/// <summary>
 	/// Gets a value indicating whether this instance is connected.
 	/// </summary>
@@ -65,9 +63,15 @@ public class PlayerInformation {
 		get{ return PlayerState.IsConnected; }
 	}
 
+    /// <summary>
+    /// Initialize information
+    /// </summary>
+    /// <param name="iPlayerIndex"></param>
+    /// <param name="iCharacterType"></param>
+    /// <returns></returns>
 	public PlayerInformation Init(PlayerIndex iPlayerIndex, CharacterType iCharacterType = CharacterType.CHARACTER_YELLOW){
 		this.PlayerIndex = iPlayerIndex;
-        this.SelectedCharacterPath = _characterReference[iCharacterType];
+        this.SelectedCharacterPath = CharacterPaths.CHARACTER_PATH[iCharacterType];
 		return this;
 	}
 }

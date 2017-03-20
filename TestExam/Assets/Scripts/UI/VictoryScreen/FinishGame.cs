@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishGame : MonoBehaviour
-{
+public class FinishGame : MonoBehaviour {
 
     [SerializeField]
     private Scores _scores;
@@ -18,15 +17,10 @@ public class FinishGame : MonoBehaviour
     /// <summary>
     /// Instantiates the victory screen when the function is called and gives it the information it needs
     /// </summary>
-	public void GameFinished()
-    {
-#if UNITY_EDITOR
-        Debug.Log("finish");
-#endif
-        GameObject tVictoryScreen = Instantiate(_victoryScreen, transform, false);
-        tVictoryScreen.GetComponentInChildren<VictoryScreen>().SetVictoryScreen();
-        for (int i = 0; i < _scriptsToTurnOff.Count; i++)
-        {
+	public void GameFinished() {
+        _victoryScreen.SetActive(true);
+        _victoryScreen.GetComponentInChildren<VictoryScreen>().SetVictoryScreen();
+        for (int i = 0; i < _scriptsToTurnOff.Count; i++) {
             _scriptsToTurnOff[i].enabled = false;
         }
     }

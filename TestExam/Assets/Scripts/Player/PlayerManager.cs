@@ -11,7 +11,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private List<PlayerInformation> _players = new List<PlayerInformation>();
 
-    public List<PlayerInformation> Players
+    public List<PlayerInformation> Players // listed players
     {
         get
         {
@@ -30,7 +30,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     void Start()
     {
-        if (_alreadyInitialized) return;
+        if (_alreadyInitialized) return; // if not initialized initialize!
         for (int i = 0; i < 4; i++)
         {
             PlayerIndex tPlayerIndex = (PlayerIndex)i;

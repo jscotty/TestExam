@@ -58,16 +58,20 @@ public class XboxControllerManager : Singleton<XboxControllerManager> , IControl
 
 		case ButtonType.BUTTON_A:
 			return iPlayerInformation.PlayerState.Buttons.A.Equals (ButtonState.Pressed);
-			break;
 		case ButtonType.BUTTON_B:
 			return iPlayerInformation.PlayerState.Buttons.B.Equals (ButtonState.Pressed);
-			break;
 		case ButtonType.BUTTON_X:
 			return iPlayerInformation.PlayerState.Buttons.X.Equals (ButtonState.Pressed);
-			break;
 		case ButtonType.BUTTON_Y:
-			return iPlayerInformation.PlayerState.Buttons.Y.Equals (ButtonState.Pressed);
-			break;
+                return iPlayerInformation.PlayerState.Buttons.Y.Equals(ButtonState.Pressed);
+		case ButtonType.BUTTON_START:
+			return iPlayerInformation.PlayerState.Buttons.Start.Equals (ButtonState.Pressed);
+		case ButtonType.BUTTON_SELECT:
+			return iPlayerInformation.PlayerState.Buttons.Guide.Equals (ButtonState.Pressed);
+		case ButtonType.BUTTON_LB:
+			return iPlayerInformation.PlayerState.Buttons.LeftShoulder.Equals (ButtonState.Pressed);
+		case ButtonType.BUTTON_RB:
+			return iPlayerInformation.PlayerState.Buttons.RightShoulder.Equals (ButtonState.Pressed);
 		}
 
 		return false;

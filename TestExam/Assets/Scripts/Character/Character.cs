@@ -19,6 +19,17 @@ public class Character : MonoBehaviour {
         return this;
     }
 
+    void Start() {
+        if(pPlayerInformation.isSaboteur)
+            StartCoroutine(Vibrate(0.05f));
+    }
+
+    IEnumerator Vibrate(float iSeconds) {
+        pXboxControllerManager.Vibrate(pPlayerInformation, 0.3f, 0.5f);
+        yield return new WaitForSeconds(iSeconds);
+        pXboxControllerManager.Vibrate(pPlayerInformation, 0.0f, 0.0f);
+    }
+
     public void Stun(bool iIsStunned)
     {
         this.pIsStunned = iIsStunned;
