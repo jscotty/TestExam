@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundController : Singleton<SoundController> {
+public class SoundController : Singleton<SoundController>
+{
 
     private List<string> _currentSounds = new List<string>();
     private List<AudioSource> _currentAudioSources = new List<AudioSource>();
 
-    void Awake() {
+    void Awake()
+    {
         this.gameObject.AddComponent<AudioSource>();
     }
 
@@ -18,15 +20,18 @@ public class SoundController : Singleton<SoundController> {
     /// <param name="iRepeating"></param>
     /// <param name="iParentForSound"></param>
     /// <param name="iStringForDestroy"></param>
-    public void PlaySound(AudioClip iSound, bool iRepeating, string iStringForDestroy = "") {
+    public void PlaySound(AudioClip iSound, bool iRepeating, string iStringForDestroy = "")
+    {
         AudioSource tAudioSource = Instantiate(this.gameObject).GetComponent<AudioSource>();
         tAudioSource.loop = iRepeating;
         tAudioSource.clip = iSound;
         tAudioSource.Play();
-        if (!iRepeating) {
+        if (!iRepeating)
+        {
             StartCoroutine(DestroyAFterDone(tAudioSource));
         }
-        else {
+        else
+        {
             _currentSounds.Add(iStringForDestroy);
             _currentAudioSources.Add(tAudioSource);
         }
@@ -37,8 +42,10 @@ public class SoundController : Singleton<SoundController> {
     /// </summary>
     /// <param name="iAudioSource"></param>
     /// <returns></returns>
-    IEnumerator DestroyAFterDone(AudioSource iAudioSource) {
-        while (iAudioSource.isPlaying) {
+    IEnumerator DestroyAFterDone(AudioSource iAudioSource)
+    {
+        while (iAudioSource.isPlaying)
+        {
             yield return new WaitForSeconds(1);
         }
         Destroy(iAudioSource.gameObject);
@@ -48,9 +55,12 @@ public class SoundController : Singleton<SoundController> {
     /// Destroys the given audio source
     /// </summary>
     /// <param name="iSoundToDestroy"></param>
-    public void DestroyAudioSource(string iSoundToDestroy) {
-        for (int i = 0; i < _currentSounds.Count; i++) {
-            if(_currentSounds[i] == iSoundToDestroy) {
+    public void DestroyAudioSource(string iSoundToDestroy)
+    {
+        for (int i = 0; i < _currentSounds.Count; i++)
+        {
+            if (_currentSounds[i] == iSoundToDestroy)
+            {
                 AudioSource tAudioSource = _currentAudioSources[i];
                 _currentAudioSources[i].Stop();
                 _currentSounds.RemoveAt(i);

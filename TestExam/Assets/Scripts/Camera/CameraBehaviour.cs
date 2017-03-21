@@ -10,21 +10,21 @@ public class CameraBehaviour : MonoBehaviour
 {
 
     [SerializeField]
-    private float _minFOV = 30.0f;
+    private float _minFOV = 30.0f; // max zoom in
     [SerializeField]
-    private float _maxFOV = 54.0f;
+    private float _maxFOV = 54.0f; // max zoom out
     [SerializeField]
-    private float _sensitivity = 30.0f;
+    private float _sensitivity = 30.0f; // sensitivity
 
     private PlayerSpawner _spawner;
     private Camera _camera;
 
-    private float _cachedFOV;
-
+    /// <summary>
+    /// Initialization
+    /// </summary>
     void Start()
     {
         _camera = GetComponent<Camera>();
-        _cachedFOV = _camera.fieldOfView;
 
         _spawner = (PlayerSpawner)FindObjectOfType(typeof(PlayerSpawner));
     }
@@ -33,12 +33,14 @@ public class CameraBehaviour : MonoBehaviour
     {
         Vector3 center = CalculateCenterOfPlayers();
 
+        // set x position
         Vector3 tCameraPosition = transform.position;
         tCameraPosition.x = center.x;
         transform.position = tCameraPosition;
 
-        _camera.fieldOfView = _minFOV + (_minFOV * CalculateDistanceFactor()) / _sensitivity;
-        _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, _minFOV, _maxFOV);
+        // set FOV (Zoom in and out)
+        _camera.fieldOfView = _minFOV + (_minFOV * CalculateDistanceFactor()) / _sensitivity; // set field of view
+        _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, _minFOV, _maxFOV); // clamp to prevent weird looking zooming
     }
 
     #region Calculations

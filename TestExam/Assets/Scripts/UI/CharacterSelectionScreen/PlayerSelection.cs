@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using Exam.Reference.Path;
 using UnityEngine.SceneManagement;
 
-public class PlayerSelection : MonoBehaviour {
+public class PlayerSelection : MonoBehaviour
+{
 
     [SerializeField]
     private Image[] _playerImages = new Image[4];
@@ -20,7 +21,7 @@ public class PlayerSelection : MonoBehaviour {
     [SerializeField]
     private float _deselectedBlackness = 1f;
 
-    private bool[] _playerHasSelected = new bool[4] { false,false,false,false }; // check if player has selected a character
+    private bool[] _playerHasSelected = new bool[4] { false, false, false, false }; // check if player has selected a character
     private bool[] _playerHasSwitchedCharacter = new bool[4] { false, false, false, false }; // check if player has switched character to prevent switching every frame!
     private List<Sprite> _sprites = new List<Sprite>(); // all character sprites listed
     private int[] _playerSpriteIndex = new int[4] { 0, 0, 0, 0 }; // player current character index stored
@@ -29,16 +30,18 @@ public class PlayerSelection : MonoBehaviour {
     private PlayerManager _playerManager;
     private XboxControllerManager _xboxControllerManager;
     private PlayerSelectionButtonIdentifier _selectionButtons;
-    
 
-    private void Start() {
+
+    private void Start()
+    {
         _selectionButtons = GetComponent<PlayerSelectionButtonIdentifier>();
         _playerManager = PlayerManager.Instance;
         _xboxControllerManager = XboxControllerManager.Instance;
         for (int i = 0; i < 4; i++)
         {
             Sprite tSprite = Resources.Load<Sprite>(SpritePaths.SpritePath[SpriteType.CHARACTER_SELECT_YELLOW + i]);
-            if (tSprite == null) {
+            if (tSprite == null)
+            {
                 Debug.LogError("Sprite not found!!!! given path:" + SpritePaths.SpritePath[SpriteType.CHARACTER_SELECT_BLUE + i]);
                 return;
             }
@@ -49,7 +52,8 @@ public class PlayerSelection : MonoBehaviour {
         }
     }
 
-    private void Update() {
+    private void Update()
+    {
         _playerManager.UpdatePlayerList(); // update players list
 
 
@@ -58,9 +62,9 @@ public class PlayerSelection : MonoBehaviour {
         {
             PlayerInformation tPlayerInfo = _playerManager.Players[i]; // input found
 #if UNITY_EDITOR
-            if (_xboxControllerManager.GetButtonPressed(tPlayerInfo, ButtonType.BUTTON_START)) SceneManager.LoadScene(2);
+            if (_xboxControllerManager.GetButtonPressed(tPlayerInfo, ButtonType.BUTTON_START)) SceneManager.LoadScene(2); // load scene only in editor mode
 #endif
-                if (_playerHasSelected[i]) // check if already selected a character
+            if (_playerHasSelected[i]) // check if already selected a character
             {
 
                 if (_selectionButtons.GetButtonClicked(ButtonType.BUTTON_B, i)) // check if back button has been clicked
@@ -71,18 +75,19 @@ public class PlayerSelection : MonoBehaviour {
                     _playerImages[i].color = new Color(_deselectedBlackness, _deselectedBlackness, _deselectedBlackness, 1f);
                     _playerSpriteIndex[i] = _sprites.Count - 1;
                 }
-                else {
+                else
+                {
                     continue; // next 'i' index when not.
                 }
             }
 
             //character next/previous selection
-            if (_xboxControllerManager.GetLeftStickAxis(tPlayerInfo).x > _selectSensitivity) 
+            if (_xboxControllerManager.GetLeftStickAxis(tPlayerInfo).x > _selectSensitivity)
             {
                 if (_playerHasSwitchedCharacter[i]) break; // prevent fast player switching
 
                 _playerHasSwitchedCharacter[i] = true;
-                if (_playerSpriteIndex[i] >= _sprites.Count-1)
+                if (_playerSpriteIndex[i] >= _sprites.Count - 1)
                 {
                     _playerSpriteIndex[i] = 0;
                 }
@@ -98,7 +103,7 @@ public class PlayerSelection : MonoBehaviour {
                 _playerHasSwitchedCharacter[i] = true;
                 if (_playerSpriteIndex[i] == 0)
                 {
-                    _playerSpriteIndex[i] = _sprites.Count-1;
+                    _playerSpriteIndex[i] = _sprites.Count - 1;
                 }
                 else
                 {
@@ -113,7 +118,8 @@ public class PlayerSelection : MonoBehaviour {
             Sprite tSprite = _sprites[_playerSpriteIndex[i]];
 
             //select character
-            if (_selectionButtons.GetButtonClicked(ButtonType.BUTTON_A, i)) {
+            if (_selectionButtons.GetButtonClicked(ButtonType.BUTTON_A, i))
+            {
                 _playerHasSelected[i] = true;
                 _sprites.Remove(tSprite);
                 _playerImages[i].color = new Color(_selectedBlackness, _selectedBlackness, _selectedBlackness, 1);
@@ -132,7 +138,19 @@ public class PlayerSelection : MonoBehaviour {
         }
     }
 
-    /*
+    private void CheckAllPlayersSelected() {
+        bool tAllSelected = true;
+        for (int i = 0; i < _playerHasSelected.Length; i++)
+        {
+            if (!_playerHasSelected[i])
+                tAllSelected = false;
+        }
+
+        if (tAllSelected)
+            SceneManager.LoadScene(2);
+    }
+
+    /* Nick code
     /// <summary>
     /// Let's the menu know a player has been connected
     /// </summary>
@@ -157,7 +175,8 @@ public class PlayerSelection : MonoBehaviour {
     /// <summary>
     /// Checks if all players are connected and spawns a loading screen if they are
     /// </summary>
-    public void StartGame() {
+    public void StartGame()
+    {
         Instantiate(_loadingscreen);
     }
 }

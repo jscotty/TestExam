@@ -14,6 +14,13 @@ public class CharacterItemController : Character {
     private Transform bottomOfCapsule;
     //public Transform holdItemPosition;
 
+    public ButtonType InteractButton
+    {
+        get
+        {
+            return _interactButton;
+        }
+    }
 
     public void PickItemUp(ItemBase iItem)
     {

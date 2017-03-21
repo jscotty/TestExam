@@ -19,9 +19,9 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
-    private bool _alreadyInitialized = false;
+    private bool _alreadyInitialized = false; // check if initialized
 
-    public PlayerManager Init()
+    public PlayerManager Init() // manual initialization
     {
         _alreadyInitialized = true;
         UpdatePlayerList();

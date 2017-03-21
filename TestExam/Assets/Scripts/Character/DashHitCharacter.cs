@@ -22,6 +22,7 @@ public class DashHitCharacter : Character
 
     void Start()
     {
+        //init
         _particleManager = ParticleManager.Instance;
         _soundController = SoundController.Instance;
     }
@@ -55,7 +56,7 @@ public class DashHitCharacter : Character
         Character[] tCharacters = GetComponentsInChildren<Character>();
         for (int i = 0; i < tCharacters.Length; i++)
         {
-            tCharacters[i].Stun(pIsStunned);
+            tCharacters[i].Stun(pIsStunned); // stun all character classes
         }
     }
 
