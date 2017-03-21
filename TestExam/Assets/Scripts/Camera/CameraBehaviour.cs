@@ -20,6 +20,8 @@ public class CameraBehaviour : MonoBehaviour
     private Camera _camera;
     private Animator _animator;
 
+    private float _cachedCameraZPosition = 0;
+
     /// <summary>
     /// Initialization
     /// </summary>
@@ -28,6 +30,8 @@ public class CameraBehaviour : MonoBehaviour
         _camera = GetComponent<Camera>();
         _animator = GetComponent<Animator>();
         _spawner = (PlayerSpawner)FindObjectOfType(typeof(PlayerSpawner));
+
+        _cachedCameraZPosition = transform.position.z;
     }
 
     void Update()
@@ -41,7 +45,7 @@ public class CameraBehaviour : MonoBehaviour
         transform.position = tCameraPosition;
 
         // set FOV (Zoom in and out)
-        _camera.fieldOfView = _minFOV + (_minFOV * CalculateDistanceFactor()) / _sensitivity; // set field of view
+        _camera.fieldOfView = _minFOV + (_minFOV * CalculateXDistanceFactor()) / _sensitivity; // set field of view
         _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, _minFOV, _maxFOV); // clamp to prevent weird looking zooming
     }
 
@@ -49,6 +53,7 @@ public class CameraBehaviour : MonoBehaviour
 
     private void AnimationEnded()
     {
+        _cachedCameraZPosition = transform.position.z;
         Destroy(_animator);
     }
 
@@ -68,10 +73,10 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculate distance factor of all players
+    /// Calculates X distance factor of all players
     /// </summary>
     /// <returns>distance factor</returns>
-    private float CalculateDistanceFactor()
+    private float CalculateXDistanceFactor()
     {
         float tXMinFactor = _spawner.Players[0].transform.position.x;
         float tXMaxFactor = _spawner.Players[0].transform.position.x;
@@ -85,6 +90,26 @@ public class CameraBehaviour : MonoBehaviour
 
 
         return -1 * (tXMinFactor - tXMaxFactor);
+    }
+
+    /// <summary>
+    /// Calculates X distance factor of all players
+    /// </summary>
+    /// <returns>distance factor</returns>
+    private float CalculateZDistanceFactor()
+    {
+        float tZMinFactor = _spawner.Players[0].transform.position.z;
+        float tZMaxFactor = _spawner.Players[0].transform.position.z;
+        for (int i = 0; i < _spawner.Players.Count; i++)
+        {
+            if (tZMinFactor > _spawner.Players[i].transform.position.z) // check if min x is bigger than current x position
+                tZMinFactor = _spawner.Players[i].transform.position.z;
+            if (tZMaxFactor < _spawner.Players[i].transform.position.z) // check if max x is smaller than current x position
+                tZMaxFactor = _spawner.Players[i].transform.position.z;
+        }
+
+
+        return -1 * (tZMinFactor - tZMaxFactor);
     }
     #endregion
 }
