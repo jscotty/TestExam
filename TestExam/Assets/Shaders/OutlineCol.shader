@@ -1,12 +1,15 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
 Shader "Outline/Unlit Textured outlined"
 {
 	Properties{
 		_MainTex("Texture", 2D) = "white" {}
-	_Outline("outline strength", Range(0.0,0.25)) = 0.01
+		_Outline("outline strength", Range(0.0,0.25)) = 0.01
 		_OutlineColor("Outline color", Color) = (0,0,0,0)
+		[MaterialToggle] _UseLighting("Lighting", float) = 0
 	}
 		SubShader{
 		Tags{ "RenderType" = "Opaque" }
@@ -58,30 +61,42 @@ Shader "Outline/Unlit Textured outlined"
 
 #include "UnityCG.cginc"
 
-		struct appdata {
+	struct appdata {
 		float4 vertex : POSITION;
 		float2 uv : TEXCOORD0;
+		float3 normal : NORMAL;
 	};
 
 	struct v2f {
 		float2 uv : TEXCOORD0;
 		float4 vertex : SV_POSITION;
+		float3 normal : NORMAL;
 	};
 
 	sampler2D _MainTex;
 	float4 _MainTex_ST;
+	float4 _LightColor0;
+	float _UseLighting;
 
 	v2f vert(appdata v) {
 
 		v2f o;
 		o.vertex = UnityObjectToClipPos(v.vertex);
 		o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+		o.normal = mul(float4(v.normal, 0.0), unity_ObjectToWorld).xyz;
 		return o;
 	}
 
 	fixed4 frag(v2f i) : SV_Target{
 		fixed4 col = tex2D(_MainTex, i.uv);
-	return col;
+
+		float3 normalDirection = normalize(i.normal);
+		float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
+		float3 diffuse = col.rgb * max(0.5, dot(normalDirection, lightDirection));
+		if(_UseLighting > 0.5)
+			return col * float4(diffuse,1.0);
+		else
+			return col;
 	}
 		ENDCG
 	}
