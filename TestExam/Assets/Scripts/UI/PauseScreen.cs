@@ -39,6 +39,7 @@ public class PauseScreen : MonoBehaviour {
         _pauseScreen.SetActive(false);
     }
     private void OnDestroy() {
+        GameInfoTracker.Instance.ResetScore();
         Time.timeScale = 1;
     }
 }

@@ -18,6 +18,13 @@ public class FinishGame : MonoBehaviour {
     /// Instantiates the victory screen when the function is called and gives it the information it needs
     /// </summary>
 	public void GameFinished() {
+        int tSaboteur = 0;
+        for (int i = 0; i < 4; i++) {
+            if (PlayerManager.Instance.Players[i].isSaboteur) {
+                tSaboteur = i;
+            }
+        }
+        GameInfoTracker.Instance.AddScore(_scores.CurrentScore, _scores.MaxScore - _scores.CurrentScore, tSaboteur);
         _victoryScreen.SetActive(true);
         _victoryScreen.GetComponentInChildren<VictoryScreen>().SetVictoryScreen();
         for (int i = 0; i < _scriptsToTurnOff.Count; i++) {

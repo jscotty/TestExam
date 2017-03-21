@@ -39,4 +39,29 @@ public class Forge : UpgradeItemBase
         _handoutReadyIcon.SetActive(false);
         return base.CollectHandout();
     }
+
+    public override void Interact(CharacterItemController iItemController)
+    {
+        base.Interact(iItemController);
+        if (iItemController.amIHoldingAnItem && _handoutReadyIcon.activeSelf)
+        {
+            iItemController.DropItem();
+        }
+        else if (!iItemController.amIHoldingAnItem && _handoutReadyIcon.activeSelf)
+        {
+            GameObject tObjectToHAndout = CollectHandout();
+            tObjectToHAndout.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            ItemBase tItembase = tObjectToHAndout.GetComponentInChildren<ItemBase>();
+            iItemController.PickItemUp(tItembase);
+        }
+        else if (iItemController.amIHoldingAnItem && !_handoutReadyIcon.activeSelf && !pIsCoroutineRunning)
+        {
+            PutItemIn(iItemController.itemIAmHolding, iItemController);
+        }
+        else
+        {
+            iItemController.DropItem();
+        }
+    }
+
 }

@@ -8,6 +8,12 @@ public class GameInfoTracker : Singleton<GameInfoTracker> {
     public List<int> SaboteurScores { get; private set; }
     public int CurrentRound { get; private set; }
 
+    private void Awake() {
+        if(PlayerScores == null) {
+            ResetScore();
+        }
+    }
+
     public void ResetScore() {
         CurrentRound = 0;
         PlayerScores = new List<int>();

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Scores : Singleton<Scores> {
+public class Scores : Singleton<Scores>
+{
 
     [SerializeField]
     private int _maxScore;
@@ -15,17 +16,20 @@ public class Scores : Singleton<Scores> {
     public int CurrentScore { get; private set; }
     public int MaxScore { get; private set; }
 
-    private void Awake() {
+    private void Awake()
+    {
         SetScore(_maxScore);
     }
 
     /// <summary>
     /// Updates the score if an item has been handed in
     /// </summary>
-    public void FinishedItem() {
+    public void FinishedItem()
+    {
         CurrentScore++;
         _scoreText.text = CurrentScore + "/" + MaxScore;
-        if(CurrentScore == MaxScore) {
+        if (CurrentScore == MaxScore)
+        {
             _finishGame.GameFinished();
         }
     }
@@ -34,7 +38,8 @@ public class Scores : Singleton<Scores> {
     /// Resets the current score and sets a maximum score
     /// </summary>
     /// <param name="iMaxScore"></param>
-    public void SetScore(int iMaxScore) {
+    public void SetScore(int iMaxScore)
+    {
         CurrentScore = 0;
         MaxScore = iMaxScore;
     }
