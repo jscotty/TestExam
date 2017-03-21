@@ -18,6 +18,7 @@ public class CameraBehaviour : MonoBehaviour
 
     private PlayerSpawner _spawner;
     private Camera _camera;
+    private Animator _animator;
 
     /// <summary>
     /// Initialization
@@ -25,12 +26,13 @@ public class CameraBehaviour : MonoBehaviour
     void Start()
     {
         _camera = GetComponent<Camera>();
-
+        _animator = GetComponent<Animator>();
         _spawner = (PlayerSpawner)FindObjectOfType(typeof(PlayerSpawner));
     }
 
     void Update()
     {
+        
         Vector3 center = CalculateCenterOfPlayers();
 
         // set x position
@@ -41,6 +43,13 @@ public class CameraBehaviour : MonoBehaviour
         // set FOV (Zoom in and out)
         _camera.fieldOfView = _minFOV + (_minFOV * CalculateDistanceFactor()) / _sensitivity; // set field of view
         _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, _minFOV, _maxFOV); // clamp to prevent weird looking zooming
+    }
+
+
+
+    private void AnimationEnded()
+    {
+        Destroy(_animator);
     }
 
     #region Calculations
