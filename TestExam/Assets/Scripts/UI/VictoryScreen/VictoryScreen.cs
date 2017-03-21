@@ -32,11 +32,6 @@ public class VictoryScreen : MonoBehaviour {
     private void Start() {
         _playerManager = PlayerManager.Instance;
         _xboxControllerManager = XboxControllerManager.Instance;
-        GameInfoTracker.Instance.ResetScore();
-        GameInfoTracker.Instance.AddScore(3, 7, Random.Range(0, 4));
-        GameInfoTracker.Instance.AddScore(6, 4, Random.Range(0, 4));
-        GameInfoTracker.Instance.AddScore(2, 8, Random.Range(0, 4));
-        SetVictoryScreen();
     }
 
     /// <summary>
