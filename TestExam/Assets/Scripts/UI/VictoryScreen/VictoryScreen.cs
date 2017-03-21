@@ -39,6 +39,9 @@ public class VictoryScreen : MonoBehaviour {
         SetVictoryScreen();
     }
 
+    /// <summary>
+    /// Sets the pictures and scores in the victory screen
+    /// </summary>
     public void SetVictoryScreen() {
         StartCoroutine(SkipDelay());
 
@@ -69,6 +72,12 @@ public class VictoryScreen : MonoBehaviour {
             }
         }
     }
+    /// <summary>
+    /// Converts CharacterType into pictures
+    /// </summary>
+    /// <param name="iType"></param>
+    /// <param name="victory"></param>
+    /// <returns></returns>
     private Sprite _playerSprite(CharacterType iType, bool victory) {
         int tColour = 0;
         if (iType == CharacterType.CHARACTER_BLUE) {
@@ -92,11 +101,19 @@ public class VictoryScreen : MonoBehaviour {
         }
     }
     private bool _canContinue = false;
+
+    /// <summary>
+    /// delay for being able to go to the next scene or reset the current scene
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SkipDelay() {
         yield return new WaitForSeconds(3);
         _canContinue = true;
         _continueButton.SetActive(true);
     }
+    /// <summary>
+    /// checks if the A button on a controller is clicked and then goes to the next scene or resets the current one
+    /// </summary>
     public void Update() {
         if (_canContinue) {
             for (int i = 0; i < _playerManager.Players.Count; i++) {
@@ -105,6 +122,7 @@ public class VictoryScreen : MonoBehaviour {
                         Instantiate(_loadingScreen);
                     }
                     else {
+                        GameInfoTracker.Instance.ResetScore();
                         gameObject.AddComponent<GoToScene>().GoToThisScene(2);
                     }
                 }
