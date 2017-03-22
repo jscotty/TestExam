@@ -10,7 +10,7 @@ public class GetBaseResource : MonoBehaviour , IInteract {
     {
         if (!iCharacterController.amIHoldingAnItem)
         {
-            iCharacterController.PickItemUp(Instantiate(itemToSpawn).GetComponent<ItemBase>()); 
+            iCharacterController.PickItemUp(Instantiate(itemToSpawn).GetComponentInChildren<ItemBase>()); 
         }
     }
 }

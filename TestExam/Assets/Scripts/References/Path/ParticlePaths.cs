@@ -20,6 +20,9 @@ namespace Exam.Reference.Path{
             "Particles/Stunned",
             "Particles/Stunned",
             "Particles/Stunned",
+            "Particles/ObjectFinished",
+            "Particles/ObjectVanished",
+            "Particles/ObjectCreated",
         };
 	}
 }
@@ -41,4 +44,7 @@ public enum ParticleType
     STUNNED1 = 10,
     STUNNED2 = 11,
     STUNNED3 = 12,
+    OBJECT_FINISHED = 13,
+    OBJECT_VANISHED = 14,
+    OBJECT_CREATED = 15,
 }

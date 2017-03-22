@@ -12,16 +12,39 @@ public class CharacterAnimationController : Character
 
     private Animator _animator;
     private CharacterMovement _movement;
+    private CharacterItemController _itemController;
+    private XboxControllerManager _xboxController;
+
+    private int _animCount = 0;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
         _movement = GetComponent<CharacterMovement>();
+        _itemController = GetComponentInChildren<CharacterItemController>();
+        _xboxController = XboxControllerManager.Instance;
     }
 
     void Update()
     {
         //TODO: if using anvil/wood do animation
+        if (_xboxController.GetButtonPressed(pPlayerInformation, _itemController.InteractButton))
+        {
+            if (!_itemController.amIHoldingAnItem)
+            {
+                if (_animCount < 2)
+                {
+                    SetAnimation(CharacterAnimationState.GRAB);
+                    _animCount++;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            _animCount = 0;
+        }
+
         if (_movement.IsDashing)
         {
             SetAnimation(CharacterAnimationState.DASH);
@@ -29,13 +52,17 @@ public class CharacterAnimationController : Character
         }
         else if (_movement.Velocity.magnitude > 0)
         {
-            //TODO:if item held walk held item!
-            SetAnimation(CharacterAnimationState.WALK);
+            if (_itemController.amIHoldingAnItem)
+                SetAnimation(CharacterAnimationState.WALK_HELD_ITEM);
+            else
+                SetAnimation(CharacterAnimationState.WALK);
         }
         else
         {
-            //TODO:if item held, idle held item!
-            SetAnimation(CharacterAnimationState.IDLE);
+            if (_itemController.amIHoldingAnItem)
+                SetAnimation(CharacterAnimationState.IDLE_HELD_ITEM);
+            else
+                SetAnimation(CharacterAnimationState.IDLE);
         }
     }
 
@@ -58,4 +85,6 @@ public enum CharacterAnimationState
     DASH = 3,
     HIT_ANVIL = 4,
     HIT_WOOD = 5,
+    IDLE_HELD_ITEM = 6,
+    GRAB = 7,
 }

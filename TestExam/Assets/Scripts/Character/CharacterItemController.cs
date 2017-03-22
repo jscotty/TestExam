@@ -14,12 +14,22 @@ public class CharacterItemController : Character {
     private Transform bottomOfCapsule;
     //public Transform holdItemPosition;
 
+    public ButtonType InteractButton
+    {
+        get
+        {
+            return _interactButton;
+        }
+    }
 
     public void PickItemUp(ItemBase iItem)
     {
         //TODO make a functionality to hold the item
         Debug.Log("Pick item up");
         itemIAmHolding = iItem;
+#if UNITY_EDITOR
+        Debug.Log(iItem);
+#endif
         itemIAmHolding.transform.position = transform.position;
         itemIAmHolding.transform.parent = this.transform;
         Rigidbody tRigidbody =  itemIAmHolding.GetComponent<Rigidbody>();
@@ -64,6 +74,9 @@ public class CharacterItemController : Character {
                 tInteractable = tOverlapcapsulehits[i].GetComponent<IInteract>();
                 if (tInteractable != null && tInteractable != itemIAmHolding)
                 {
+#if UNITY_EDITOR
+                    Debug.Log(tInteractable);
+#endif
                     if (tInteractable.GetType() == typeof(ItemBase) && amIHoldingAnItem)
                     {
                         tInteractable = null;

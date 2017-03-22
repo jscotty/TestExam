@@ -61,12 +61,14 @@
      <Compile Include="Assets\Scripts\Items\Anvil.cs" />
      <Compile Include="Assets\Scripts\Items\Forge.cs" />
      <Compile Include="Assets\Scripts\Items\GetBaseResource.cs" />
+     <Compile Include="Assets\Scripts\Items\HandItemIn.cs" />
      <Compile Include="Assets\Scripts\Items\Ingot.cs" />
      <Compile Include="Assets\Scripts\Items\InteractInterface.cs" />
      <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
      <Compile Include="Assets\Scripts\Items\Recipe.cs" />
      <Compile Include="Assets\Scripts\Items\RecipeHolder.cs" />
      <Compile Include="Assets\Scripts\Items\RockyTestItemConversion.cs" />
+     <Compile Include="Assets\Scripts\Items\TrashItem.cs" />
      <Compile Include="Assets\Scripts\Items\UpgradeItemBase.cs" />
      <Compile Include="Assets\Scripts\Items\WoodWorking.cs" />
      <Compile Include="Assets\Scripts\Particle\ParticleInformation.cs" />
@@ -90,8 +92,10 @@
      <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
      <Compile Include="Assets\Scripts\UI\PauseScreen.cs" />
+     <Compile Include="Assets\Scripts\UI\RotateTowardsCamera.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\FinishGame.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\VictoryScreen.cs" />
+     <Compile Include="Assets\Scripts\UI\uGUITools.cs" />
      <None Include="Assets\Shaders\OutlineCol.shader" />
      <None Include="Assets\Shaders\EdgeDetection.shader" />
  <Reference Include="UnityEngine.UI">
