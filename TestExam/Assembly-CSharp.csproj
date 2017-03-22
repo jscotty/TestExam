@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scripts\UI\InGame\Scores.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu\GoToScene.cs" />
      <Compile Include="Assets\Scripts\UI\PauseScreen.cs" />
+     <Compile Include="Assets\Scripts\UI\RotateTowardsCamera.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\FinishGame.cs" />
      <Compile Include="Assets\Scripts\UI\VictoryScreen\VictoryScreen.cs" />
      <Compile Include="Assets\Scripts\UI\uGUITools.cs" />

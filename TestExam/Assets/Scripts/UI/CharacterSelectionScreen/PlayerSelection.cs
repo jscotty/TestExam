@@ -55,8 +55,11 @@ public class PlayerSelection : MonoBehaviour
     private void Update()
     {
         _playerManager.UpdatePlayerList(); // update players list
+        CheckAllPlayersSelected();
 
-
+#if UNITY_EDITOR
+        if (Input.GetKey(KeyCode.Space)) SceneManager.LoadScene(2); // load scene only in editor mode
+#endif
         // check input from all players
         for (int i = 0; i < _playerManager.Players.Count; i++)
         {

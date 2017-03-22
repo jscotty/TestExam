@@ -61,10 +61,6 @@ public class CharacterItemController : Character {
 
     void Update()
     {
-        if (pIsStunned)
-        {
-            DropItem();
-        }
         if (pXboxControllerManager == null)
         {
             pXboxControllerManager = XboxControllerManager.Instance;

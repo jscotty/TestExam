@@ -13,6 +13,13 @@ public class UpgradeItemBase : MonoBehaviour, IInteract
     protected GameObject pObjecToHandOut;
     protected bool pIsCoroutineRunning = false;
 
+    protected ParticleManager pParticleManager;
+
+    void Start()
+    {
+        pParticleManager = ParticleManager.Instance;
+    }
+
     public virtual void PutItemIn(ItemBase iItemType, CharacterItemController iPlayerInfo)
     {
 
@@ -42,7 +49,7 @@ public class UpgradeItemBase : MonoBehaviour, IInteract
 
     public virtual GameObject CollectHandout()
     {
-        
+        pParticleManager.SpawnParticle(ParticleType.OBJECT_CREATED, transform.position, true);
         return Instantiate(pObjecToHandOut,transform.position,Quaternion.identity);
     }
 
