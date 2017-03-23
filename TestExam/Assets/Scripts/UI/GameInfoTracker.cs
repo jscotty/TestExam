@@ -9,7 +9,7 @@ public class GameInfoTracker : Singleton<GameInfoTracker> {
     public int CurrentRound { get; private set; }
 
     private void Awake() {
-        if(PlayerScores == null) {
+        if(PlayerScores == null || SaboteurScores == null) {
             ResetScore();
         }
     }
@@ -18,14 +18,14 @@ public class GameInfoTracker : Singleton<GameInfoTracker> {
         CurrentRound = 0;
         PlayerScores = new List<int>();
         SaboteurScores = new List<int>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < PlayerManager.Instance.Players.Count; i++) {
             PlayerScores.Add(0);
             SaboteurScores.Add(0);
         }
     }
 
     public void AddScore(int iSaboteurScore, int iSmithScore, int iSaboteurPlayer) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < PlayerManager.Instance.Players.Count; i++) {
             if(i == iSaboteurPlayer) {
                 SaboteurScores[i] += iSaboteurScore;
             }

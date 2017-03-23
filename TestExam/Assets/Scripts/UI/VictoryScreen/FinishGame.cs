@@ -19,7 +19,7 @@ public class FinishGame : MonoBehaviour {
     /// </summary>
 	public void GameFinished() {
         int tSaboteur = 0;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < PlayerManager.Instance.Players.Count; i++) {
             if (PlayerManager.Instance.Players[i].isSaboteur) {
                 tSaboteur = i;
             }
