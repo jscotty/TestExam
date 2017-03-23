@@ -17,11 +17,17 @@ public class SceneLoader : MonoBehaviour {
 
     [SerializeField]
     private int scene;
+
+    private XboxControllerManager _xboxControllerManager;
+    private PlayerManager _playerManager;
     
     private void Start() {
         if (!_loadScene) {
+            _xboxControllerManager = XboxControllerManager.Instance;
+            _playerManager = PlayerManager.Instance;
             _loadScene = true;
             DontDestroyOnLoad(transform.parent.gameObject);
+            Time.timeScale = 0;
             StartCoroutine(LoadNewScene());
         }
     }
@@ -31,7 +37,6 @@ public class SceneLoader : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     IEnumerator LoadNewScene() {
-        yield return new WaitForSeconds(1);
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
         
         while (!async.isDone) {
@@ -46,9 +51,14 @@ public class SceneLoader : MonoBehaviour {
     /// <summary>
     /// Removes the loading screen if the scene is done loading
     /// </summary>
-    public void RemoveLoadingScreen() {
+    private void Update() {
         if (_destroyable) {
-            Destroy(transform.parent.gameObject);
+            for (int i = 0; i < _playerManager.Players.Count; i++) {
+                if (_xboxControllerManager.GetButtonPressed(_playerManager.Players[i], ButtonType.BUTTON_A)) {
+                    Time.timeScale = 1;
+                    Destroy(transform.parent.gameObject);
+                }
+            }
         }
     }
 }

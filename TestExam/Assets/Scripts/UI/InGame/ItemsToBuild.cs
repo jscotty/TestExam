@@ -7,11 +7,14 @@ public class ItemsToBuild : MonoBehaviour {
     [SerializeField]
     private GameObject _itemUIPrefab;
     private List<GameObject> _currentRecipes = new List<GameObject>();
-    [SerializeField]
     private RecipeHolder _recipeHolder;
     private List<Items> _currentItems = new List<Items>();
     [SerializeField]
     private Scores _scores;
+
+    private void Awake() {
+        _recipeHolder = RecipeHolder.Instance;
+    }
 
     private void Start() {
         CreateRecipe();
