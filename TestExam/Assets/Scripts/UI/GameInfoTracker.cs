@@ -24,7 +24,7 @@ public class GameInfoTracker : Singleton<GameInfoTracker> {
         }
     }
 
-    public void AddScore(int iSaboteurScore, int iSmithScore, int iSaboteurPlayer) {
+    public void AddScore(int iSmithScore, int iSaboteurScore, int iSaboteurPlayer) {
         for (int i = 0; i < PlayerManager.Instance.Players.Count; i++) {
             if(i == iSaboteurPlayer) {
                 SaboteurScores[i] += iSaboteurScore;
