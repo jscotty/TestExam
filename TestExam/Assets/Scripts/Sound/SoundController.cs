@@ -7,10 +7,13 @@ public class SoundController : Singleton<SoundController>
 
     private List<string> _currentSounds = new List<string>();
     private List<AudioSource> _currentAudioSources = new List<AudioSource>();
+    private GameObject _soundObject;
 
     void Awake()
     {
-        this.gameObject.AddComponent<AudioSource>();
+        _soundObject = new GameObject("soundObj");
+        _soundObject.transform.SetParent(transform);
+        _soundObject.AddComponent<AudioSource>();
     }
 
     /// <summary>
@@ -22,7 +25,7 @@ public class SoundController : Singleton<SoundController>
     /// <param name="iStringForDestroy"></param>
     public void PlaySound(AudioClip iSound, bool iRepeating, string iStringForDestroy = "")
     {
-        AudioSource tAudioSource = Instantiate(this.gameObject).GetComponent<AudioSource>();
+        AudioSource tAudioSource = Instantiate(_soundObject).GetComponent<AudioSource>();
         tAudioSource.loop = iRepeating;
         tAudioSource.clip = iSound;
         tAudioSource.Play();

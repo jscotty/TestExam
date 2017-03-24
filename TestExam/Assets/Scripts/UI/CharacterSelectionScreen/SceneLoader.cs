@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour {
+public class SceneLoader : MonoBehaviour
+{
 
     private bool _loadScene = false;
     private bool _destroyable = false;
@@ -20,9 +21,11 @@ public class SceneLoader : MonoBehaviour {
 
     private XboxControllerManager _xboxControllerManager;
     private PlayerManager _playerManager;
-    
-    private void Start() {
-        if (!_loadScene) {
+
+    private void Start()
+    {
+        if (!_loadScene)
+        {
             _xboxControllerManager = XboxControllerManager.Instance;
             _playerManager = PlayerManager.Instance;
             _loadScene = true;
@@ -36,25 +39,32 @@ public class SceneLoader : MonoBehaviour {
     /// Checks when the next scene is done loading
     /// </summary>
     /// <returns></returns>
-    IEnumerator LoadNewScene() {
+    IEnumerator LoadNewScene()
+    {
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
-        
-        while (!async.isDone) {
+
+        while (!async.isDone)
+        {
             yield return null;
         }
         Debug.Log("Scene done loading");
         _destroyable = true;
         _loadingScreenText.text = _loadingScreenDoneText;
-        _buttonImage.SetActive(true);
+        if (_buttonImage != null)
+            _buttonImage.SetActive(true);
     }
 
     /// <summary>
     /// Removes the loading screen if the scene is done loading
     /// </summary>
-    private void Update() {
-        if (_destroyable) {
-            for (int i = 0; i < _playerManager.Players.Count; i++) {
-                if (_xboxControllerManager.GetButtonPressed(_playerManager.Players[i], ButtonType.BUTTON_A)) {
+    private void Update()
+    {
+        if (_destroyable)
+        {
+            for (int i = 0; i < _playerManager.Players.Count; i++)
+            {
+                if (_xboxControllerManager.GetButtonPressed(_playerManager.Players[i], ButtonType.BUTTON_A))
+                {
                     Time.timeScale = 1;
                     Destroy(transform.parent.gameObject);
                 }

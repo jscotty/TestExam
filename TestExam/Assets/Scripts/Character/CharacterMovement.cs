@@ -59,7 +59,10 @@ public class CharacterMovement : Character
         if (pXboxControllerManager.GetButtonPressed(base.pPlayerInformation, _dashButton) && !_isDashCooldown && !IsDashing)
         {
             if (_dashClip != null)
+            {
+                if (_soundController == null) _soundController = SoundController.Instance;
                 _soundController.PlaySound(_dashClip, false);
+            }
             IsDashing = true;
         }
         if (IsDashing)
