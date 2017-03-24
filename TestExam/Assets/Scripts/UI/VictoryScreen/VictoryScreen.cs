@@ -42,17 +42,19 @@ public class VictoryScreen : MonoBehaviour {
 
         List<int> tRecipeScores = GameInfoTracker.Instance.PlayerScores;
         List<int> tSaboteurScores = GameInfoTracker.Instance.SaboteurScores;
-        List<int> tTotalScores = new List<int>();
+        List<int> tTotalScores = new List<int>(4);
 
         int tHighestScore = 0;
         for (int i = 0; i < 4; i++) {
-            CharacterType type = CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath];
-            _playerPortrait[i].sprite = _playerSprite(type, false);
-            tTotalScores.Add(tRecipeScores[i] + tSaboteurScores[i]);
-            _scoreText[i].text = tRecipeScores[i] + "\n" + tSaboteurScores[i];
-            _totalScores[i].text = tTotalScores[i].ToString();
-            if (tTotalScores[i] > tHighestScore) {
-                tHighestScore = tTotalScores[i];
+            if (i < _playerManager.Players.Count) {
+                CharacterType type = CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath];
+                _playerPortrait[i].sprite = _playerSprite(type, false);
+                tTotalScores.Add(tRecipeScores[i] + tSaboteurScores[i]);
+                _scoreText[i].text = tRecipeScores[i] + "\n" + tSaboteurScores[i];
+                _totalScores[i].text = tTotalScores[i].ToString();
+                if (tTotalScores[i] > tHighestScore) {
+                    tHighestScore = tTotalScores[i];
+                }
             }
         }
         if (GameInfoTracker.Instance.CurrentRound == 3) {
