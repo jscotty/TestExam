@@ -29,7 +29,7 @@ public class VictoryScreen : MonoBehaviour {
     private PlayerManager _playerManager;
     private XboxControllerManager _xboxControllerManager;
 
-    private void Start() {
+    private void Awake() {
         _playerManager = PlayerManager.Instance;
         _xboxControllerManager = XboxControllerManager.Instance;
     }
@@ -45,7 +45,6 @@ public class VictoryScreen : MonoBehaviour {
         List<int> tTotalScores = new List<int>();
 
         int tHighestScore = 0;
-
         for (int i = 0; i < 4; i++) {
             CharacterType type = CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath];
             _playerPortrait[i].sprite = _playerSprite(type, false);

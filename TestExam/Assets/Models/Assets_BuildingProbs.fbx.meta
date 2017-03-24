@@ -39,6 +39,9 @@ ModelImporter:
     100062: Interactive_Bow
     100064: Interactive_Oven2
     100066: TrashCan
+    100068: Door1
+    100070: Planken
+    100072: saw
     400000: //RootNode
     400002: BarMetal
     400004: BeamLarg
@@ -73,6 +76,9 @@ ModelImporter:
     400062: Interactive_Bow
     400064: Interactive_Oven2
     400066: TrashCan
+    400068: Door1
+    400070: Planken
+    400072: saw
     2300000: BarMetal
     2300002: BeamLarg
     2300004: Door
@@ -106,6 +112,9 @@ ModelImporter:
     2300060: Interactive_Bow
     2300062: Interactive_Oven2
     2300064: TrashCan
+    2300066: Door1
+    2300068: Planken
+    2300070: saw
     3300000: BarMetal
     3300002: BeamLarg
     3300004: Door
@@ -139,6 +148,9 @@ ModelImporter:
     3300060: Interactive_Bow
     3300062: Interactive_Oven2
     3300064: TrashCan
+    3300066: Door1
+    3300068: Planken
+    3300070: saw
     4300000: Wall_NoHoll
     4300002: Wall_holl
     4300004: LowerWall
@@ -172,6 +184,9 @@ ModelImporter:
     4300060: Interactive_Oven2
     4300062: Interactive_Bow
     4300064: TrashCan
+    4300066: saw
+    4300068: Planken
+    4300070: Door1
   materials:
     importMaterials: 1
     materialName: 0
