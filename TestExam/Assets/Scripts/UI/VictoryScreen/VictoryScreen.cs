@@ -62,7 +62,7 @@ public class VictoryScreen : MonoBehaviour {
                 if (tTotalScores[i] == tHighestScore) {
                     _scorePlates[i].SetActive(false);
                     _mvpPlates[i].SetActive(true);
-                    _playerObject[i].transform.Translate(Vector2.up * 70);
+                    _playerObject[i].transform.Translate(Vector2.up * 60);
                     _playerPortrait[i].sprite = _playerSprite(CharacterPaths.CHARACTER_COLOR[_playerManager.Players[i].SelectedCharacterPath], true);
                 }
             }
@@ -114,7 +114,8 @@ public class VictoryScreen : MonoBehaviour {
         if (_canContinue) {
             for (int i = 0; i < _playerManager.Players.Count; i++) {
                 if (_xboxControllerManager.GetButtonPressed(_playerManager.Players[i], ButtonType.BUTTON_A)) {
-                    if (GameInfoTracker.Instance.CurrentRound != 3) {
+                    Debug.Log("works " + GameInfoTracker.Instance.CurrentRound);
+                    if (GameInfoTracker.Instance.CurrentRound < 3) {
                         Instantiate(_loadingScreen);
                     }
                     else {
